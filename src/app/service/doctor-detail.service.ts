@@ -35,4 +35,11 @@ export class DoctorDetailService {
 
     return this.http.put(this.url+"appointments/"+appCode,appDetails);
   }
+
+  getProfilePic(fileName){   const httpOptions = {
+    'responseType'  : 'blob' as 'json'
+
+  };
+   return this.http.get(this.url+"doctors/getPic?picName="+fileName,httpOptions);
+  }
 }

@@ -454,7 +454,7 @@
 
           <div class="profileImg">
 
-            <img src="assets/profile.png" class="img">
+            <img [src]="proPic" class="img">
           </div>
         </div>
 
@@ -478,7 +478,7 @@
 
         <div class="col-lg-12">
           <br>
-          <label class="lbl"> <i class="fas fa-user-circle"></i> &nbsp;About Dr. Dinu  </label>
+          <label class="lbl"> <i class="fas fa-user-circle"></i> &nbsp;About Doctor  </label>
           <p>
             {{docAbout}}
           </p>
@@ -528,14 +528,15 @@
 
           <div class="col-lg-6">
             <br>
-            <input type="time" class="form-control" atp-time-picker value="12:00" [ngModel] name="time">
 
+            <input type="date" class="form-control" [ngModel] name="date" matInput>
 
           </div>
 
           <div class="col-lg-6">
             <br>
-            <input type="date" class="form-control" [ngModel] name="date" matInput>
+
+            <input type="time" class="form-control" atp-time-picker value="12:00" [ngModel] name="time">
 
           </div>
 
