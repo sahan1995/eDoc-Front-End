@@ -10,6 +10,7 @@ import {DoctorSignupComponent} from "./doctor-signup/doctor-signup.component";
 import {DoctorHomeComponent} from "./doctor-home/doctor-home.component";
 import {ConsultDoctorComponent} from "./consult-doctor/consult-doctor.component";
 import {DoctorDetailComponent} from "./doctor-detail/doctor-detail.component";
+import {DoctorAppointmentsComponent} from "./doctor-appointments/doctor-appointments.component";
 
 const routes: Routes = [
   {path :'',redirectTo:'home',pathMatch:'full'},
@@ -21,6 +22,7 @@ const routes: Routes = [
   {path :'Doctor-Home',component:DoctorHomeComponent},
   {path :'Consult-Doctor',component:ConsultDoctorComponent},
   {path :'Doctor-Detail/:id',component:DoctorDetailComponent},
+  {path :'Doctor-Appointment',component:DoctorAppointmentsComponent},
   {path:'',component:IndexwindowComponent}
 ];
 
@@ -30,4 +32,4 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[RegisterComponent,IndexwindowComponent,PatientSignUpComponent,SignInComponent,PatientHomeComponent,
-DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent]
+DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent]
