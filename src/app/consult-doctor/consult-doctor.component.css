@@ -1,0 +1,218 @@
+.example-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
+.example-option-img {
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+[dir='rtl'] .example-option-img {
+  margin-right: 0;
+  margin-left: 8px;
+}
+/*the container must be positioned relative:*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff;
+  border-bottom: 1px solid #d4d4d4;
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: #e9e9e9;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important;
+  color: #ffffff;
+}
+.searchBar{
+  background-color: #3F4079 ;
+  height: 75px;
+}
+
+
+#search-text-input{
+  border-top:thin solid  #e5e5e5;
+  border-right:thin solid #e5e5e5;
+  border-bottom:0;
+  border-left:thin solid  #e5e5e5;
+  box-shadow:0px 1px 1px 1px #e5e5e5;
+  float:left;
+  height:17px;
+  margin:.8em 0 0 .5em;
+  outline:0;
+  padding:.4em 0 .4em .6em;
+  width:183px;
+}
+
+#button-holder{
+  background-color:#f1f1f1;
+  border-top:thin solid #e5e5e5;
+  box-shadow:1px 1px 1px 1px #e5e5e5;
+  cursor:pointer;
+  float:left;
+  height:27px;
+  margin:11px 0 0 0;
+  text-align:center;
+  width:50px;
+}
+
+#button-holder button{
+  margin:4px;
+  width:20px;
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+form.example input[type=text] {
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+form.example button {
+  float: left;
+  width: 20%;
+  padding: 10px;
+  background: #2196F3;
+  color: white;
+  font-size: 17px;
+  border: 1px solid grey;
+  border-left: none;
+  cursor: pointer;
+  border-top-right-radius: 10px;
+  border-bottom-right-radius: 10px;
+}
+
+.example{
+  border: black solid 1px;
+  border-radius: 10px;
+  width: 100%;
+}
+form.example button:hover {
+  background: #0b7dda;
+}
+
+form.example::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.searchText{
+  float: right;
+
+}
+.text{
+
+}
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.bookNow {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+
+.bookNow:hover, a:hover {
+  opacity: 0.7;
+}
+.doctorCard{
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 2px;
+}
+.insideTop{
+  border-bottom: black solid 1px;
+}
+.imgDiv{
+  float: left;
+
+}
+.img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.card a{
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+.profileImg{
+  height: 100%;
+  width: 100%;
+
+}

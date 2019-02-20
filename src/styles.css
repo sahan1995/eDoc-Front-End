@@ -1,0 +1,14 @@
+/* You can add global styles to this file, and also import other style files */
+
+
+@import "~bootstrap-3.3.7-dist/css/bootstrap-theme.min.css";
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~admin-lte-css/dist/css/AdminLTE.css";
+@import "~admin-lte-css/dist/css/skins/_all-skins.css";
+
+/*.icon-block {*/
+  /*padding: 0 15px;*/
+/*}*/
+/*.icon-block .material-icons {*/
+  /*font-size: inherit;*/
+/*}*/
