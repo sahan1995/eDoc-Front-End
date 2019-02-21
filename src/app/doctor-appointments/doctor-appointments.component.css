@@ -17,3 +17,8 @@
 .appdiv{
   margin-bottom: 20px;
 }
+agm-map{
+  border-radius: 15px;
+  height: 500px;
+  /*width: 300px;*/
+}

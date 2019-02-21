@@ -32,6 +32,7 @@ import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appointments.component';
+import { AgmDirectionModule } from 'agm-direction'
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +73,9 @@ import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appoin
     MatDividerModule,
     MatListModule,
     MatCheckboxModule,
-    MatRadioModule
+    MatRadioModule,
+    AgmDirectionModule,
+
 
 
   ],

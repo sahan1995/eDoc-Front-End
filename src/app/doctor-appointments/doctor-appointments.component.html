@@ -468,9 +468,10 @@
               <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">{{appType}}
                 <span class="caret"></span></button>
               <ul class="dropdown-menu">
-                <li><a (click)="appType='Web Consultation'">Web Consultation</a></li>
-                <li><a>Private Practice Consultation</a></li>
-                <li><a>Home Consultation</a></li>
+                <li><a (click)="getDoctorAppointments(DID)">All Consultations</a></li>
+                <li><a (click)="webConsultation()">Web Consultations</a></li>
+                <li><a (click)="ppConsultation()">Private Practice Consultations</a></li>
+                <li><a (click)="homeConsultation()">Home Consultations</a></li>
               </ul>
             </div>
           </div>
@@ -533,9 +534,27 @@
 
               </mat-list>
             </div>
-            <button mat-raised-button *ngIf="app.appType=='home'">Hello</button>
+            <button mat-raised-button color="warn" >Cancel Appointment</button>&nbsp;
+            <button mat-raised-button color="primary" *ngIf="app.appType=='Web Consultation'" [disabled]="!(myFormattedDate>=app.date)" >Take Appointment</button>&nbsp;
+            <button mat-raised-button *ngIf="app.appType=='Home Consultation'" (click)="showMap(app.lat,app.lng)" >{{showMapTitle}}</button>
+            <!--<p>{{myFormattedDate>=app.date}}</p>-->
+            <!--<p>{{time>=app.time}}</p>-->
+            <!--<p>{{time+" "+app.time}}</p>-->
+            <!--<p>{{!(time>=app.time && myFormattedDate>=app.date)}}</p>-->
           </div>
 
+          <div *ngIf="app.appType=='Home Consultation'&&mapFlag" class="w3-animate-opacity">
+            <agm-map [latitude]="app.lat" [longitude]="app.lng">
+
+              <agm-direction [origin]="origin" [destination]="destination">
+
+              </agm-direction>
+              <!--<agm-marker [longitude]="app.lng" [latitude]="app.lat">-->
+
+              <!--</agm-marker>-->
+            </agm-map>
+            <!--{{app.lat +"   " + app.lng}}-->
+          </div>
         </div>
 
         <!--<div class="col-lg-12">-->

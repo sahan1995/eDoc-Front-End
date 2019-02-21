@@ -21,9 +21,12 @@ export class SignInComponent implements OnInit {
       if(result==""){
         console.log("User Name or Password Invalid")
       }else{
+        console.log(result)
         localStorage.setItem("fname",result['fname'])
         localStorage.setItem("lname",result['lname'])
         localStorage.setItem("id",result['id'])
+        localStorage.setItem("lat",result['lat'])
+        localStorage.setItem("lng",result['lng'])
 
         let role = result["role"];
 

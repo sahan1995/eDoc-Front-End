@@ -23,4 +23,9 @@ export class DoctorAppointmentsService {
     };
     return this.http.get(this.url+"patients/getPic?picName="+picName,httpOptions)
   }
+  findByAppType(appType,DID){
+
+
+    return this.http.get(this.url+"appointments/findByType?appType="+appType+"&DID="+DID)
+  }
 }
