@@ -26,7 +26,7 @@ export class DoctorAppointmentsComponent implements OnInit {
   private DID;
   private appointments;
   private appointDetails: any;
-  private appType = "Type of Appointment"
+  private appType;
   private showMapTitle = "Show Direction";
   private mapFlag = false;
   public origin: any;
@@ -49,56 +49,14 @@ export class DoctorAppointmentsComponent implements OnInit {
   getDoctorAppointments(DID) {
     this.appType = "All  Appointment"
     this.doctorAppSer.getDoctorAppointments(DID).subscribe(result => {
-      this.appointments = result;
-
-      this.appointments.forEach(appoint => {
-        // this.appointDetails["appCode"] = appoint.patientDTO.fname;
-        // console.log(appoint.patientDTO.fname)
-        this.appointDetails = appoint;
-        appoint["patientName"] = appoint.patientDTO.fname + " " + appoint.patientDTO.lname;
-        appoint["lat"] = appoint.patientDTO.lat;
-        appoint["lng"] = appoint.patientDTO.lng;
-        appoint["time"] = this.tConvert(appoint.time);
-        this.doctorAppSer.getProPic(appoint.patientDTO.profilePic).subscribe(result => {
-
-          let reader = new FileReader();
-          reader.addEventListener("load", () => {
-            appoint["patientPic"] = reader.result;
-          }, false)
-          if (result) {
-            const img = result as Blob
-            reader.readAsDataURL(img)
-          }
-        })
-      })
+      this.loadResult(result)
     })
   }
 
 
   findByAppType(appType, DID) {
     this.doctorAppSer.findByAppType(appType, DID).subscribe(result => {
-      this.appointments = result;
-
-      this.appointments.forEach(appoint => {
-        // this.appointDetails["appCode"] = appoint.patientDTO.fname;
-        // console.log(appoint.patientDTO.fname)
-        this.appointDetails = appoint;
-        appoint["patientName"] = appoint.patientDTO.fname + " " + appoint.patientDTO.lname;
-        appoint["lat"] = appoint.patientDTO.lat;
-        appoint["lng"] = appoint.patientDTO.lng;
-        appoint["time"] = this.tConvert(appoint.time);
-        this.doctorAppSer.getProPic(appoint.patientDTO.profilePic).subscribe(result => {
-
-          let reader = new FileReader();
-          reader.addEventListener("load", () => {
-            appoint["patientPic"] = reader.result;
-          }, false)
-          if (result) {
-            const img = result as Blob
-            reader.readAsDataURL(img)
-          }
-        })
-      })
+      this.loadResult(result)
     })
   }
 
@@ -153,4 +111,55 @@ export class DoctorAppointmentsComponent implements OnInit {
     // this.destination = 'Taiwan Presidential Office';
   }
 
+
+  dateSelected(date) {
+    var selectDate = date.value;
+    if (this.appType == "All  Appointment") {
+      this.doctorAppSer.findByDate(selectDate, this.DID).subscribe(result => {
+
+        this.loadResult(result);
+
+      })
+
+    }else if(this.appType=="Web Consultation"){
+
+      this.doctorAppSer.findByDateAndAppType(selectDate,this.DID,this.appType).subscribe(result=>{
+        this.loadResult(result)
+      })
+    }else if(this.appType=="Home Consultation"){
+      this.doctorAppSer.findByDateAndAppType(selectDate,this.DID,this.appType).subscribe(result=>{
+        this.loadResult(result)
+      })
+    }else if(this.appType=="Private Practice Consultation"){
+      this.doctorAppSer.findByDateAndAppType(selectDate,this.DID,this.appType).subscribe(result=>{
+        this.loadResult(result)
+      })
+    }
+  }
+
+
+  loadResult(result) {
+    this.appointments = result;
+
+    this.appointments.forEach(appoint => {
+      // this.appointDetails["appCode"] = appoint.patientDTO.fname;
+      // console.log(appoint.patientDTO.fname)
+      this.appointDetails = appoint;
+      appoint["patientName"] = appoint.patientDTO.fname + " " + appoint.patientDTO.lname;
+      appoint["lat"] = appoint.patientDTO.lat;
+      appoint["lng"] = appoint.patientDTO.lng;
+      appoint["time"] = this.tConvert(appoint.time);
+      this.doctorAppSer.getProPic(appoint.patientDTO.profilePic).subscribe(result => {
+
+        let reader = new FileReader();
+        reader.addEventListener("load", () => {
+          appoint["patientPic"] = reader.result;
+        }, false)
+        if (result) {
+          const img = result as Blob
+          reader.readAsDataURL(img)
+        }
+      })
+    })
+  }
 }

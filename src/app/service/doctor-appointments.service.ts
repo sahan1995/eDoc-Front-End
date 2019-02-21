@@ -28,4 +28,15 @@ export class DoctorAppointmentsService {
 
     return this.http.get(this.url+"appointments/findByType?appType="+appType+"&DID="+DID)
   }
+
+
+  findByDate(date,DID){
+
+    return this.http.get(this.url+"appointments/findByDate?date="+date+"&DID="+DID);
+  }
+
+  findByDateAndAppType(date, DID, appType){
+
+    return this.http.get(this.url+"appointments/findByDateAndType?date="+date+"&DID="+DID+"&appType="+appType);
+  }
 }
