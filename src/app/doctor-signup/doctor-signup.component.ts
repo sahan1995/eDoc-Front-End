@@ -66,8 +66,7 @@ export class DoctorSignupComponent implements OnInit {
         console.log(this.doctorID)
       }else{
         this.lastID =result;
-        var array = this.lastID.split("Doc");
-        var num = parseInt(array[1])+1;
+        var num = parseInt(this.lastID)+1;
         this.doctorID = "Doc"+num;
 
       }
@@ -77,6 +76,7 @@ export class DoctorSignupComponent implements OnInit {
       serializedForm["lng"] = this.lng;
       serializedForm["profilePic"] = this.proImgeName;
       serializedForm["role"] = "doctor";
+      serializedForm["aboutMe"] = "Joyce Lee, MD, MPH, is the Robert P. Kelch, MD Research Professor of Pediatrics at the University of Michigan Medical School and Professor at the Medical School and at the University of Michigan School of Public Health. Dr Lee attended Brown University for her undergraduate education and the University of Pennsylvania for her medical degree, where she was elected to the Alpha Omega Alpha Honors Society. She completed internship and residency in General Pediatrics at the Boston Combined Residency Program (Children's Hospital, Boston and Boston Medical Center). She completed dual training in Pediatric Endocrinology and Pediatric Health Services Research and received a Master in Public Health from the Department of Health Management and Policy at the University of Michigan."
       this.docServie.register(this.doctorID,serializedForm).subscribe(result=>{
         alert("Done");
         this.route.navigate(["/SignIn"])

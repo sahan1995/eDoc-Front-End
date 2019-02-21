@@ -69,8 +69,7 @@ export class PatientSignUpComponent implements OnInit {
 
       }else{
         lastID = result;
-        var array = lastID.split("pat");
-        var num = parseInt(array[1])+1;
+        var num = parseInt(lastID)+1;
         this.patientID="pat"+num;
         serializedForm["ID"]=this.patientID;
       }

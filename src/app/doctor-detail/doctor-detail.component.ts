@@ -80,8 +80,7 @@ export class DoctorDetailComponent implements OnInit {
             this.appCode = "App1";
 
           } else {
-            var arr = this.lastCode.split("App");
-            var num = parseInt(arr[1]) + 1;
+            var num =  parseInt(this.lastCode)+1;
             this.appCode = "App" + num;
           }
           serial["appCode"] = this.appCode;
