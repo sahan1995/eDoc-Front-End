@@ -11,6 +11,9 @@ import {DoctorHomeComponent} from "./doctor-home/doctor-home.component";
 import {ConsultDoctorComponent} from "./consult-doctor/consult-doctor.component";
 import {DoctorDetailComponent} from "./doctor-detail/doctor-detail.component";
 import {DoctorAppointmentsComponent} from "./doctor-appointments/doctor-appointments.component";
+import {DoctorVideochatDashboardComponent} from "./doctor-videochat-dashboard/doctor-videochat-dashboard.component";
+import {PatientVideochatDashboardComponent} from "./patient-videochat-dashboard/patient-videochat-dashboard.component";
+import {PatientAppointmentsComponent} from "./patient-appointments/patient-appointments.component";
 
 const routes: Routes = [
   {path :'',redirectTo:'home',pathMatch:'full'},
@@ -23,6 +26,9 @@ const routes: Routes = [
   {path :'Consult-Doctor',component:ConsultDoctorComponent},
   {path :'Doctor-Detail/:id',component:DoctorDetailComponent},
   {path :'Doctor-Appointment',component:DoctorAppointmentsComponent},
+  {path :'Doctor-VideoChat-DashBoard/:id/:appCode',component:DoctorVideochatDashboardComponent},
+  {path :'Patient-VideoChat-DashBoard/:id/:appCode',component:PatientVideochatDashboardComponent},
+  {path :'Patient-Appointment',component:PatientAppointmentsComponent},
   {path:'',component:IndexwindowComponent}
 ];
 
@@ -32,4 +38,5 @@ const routes: Routes = [
 })
 export class AppRoutingModule { }
 export const routingComponents=[RegisterComponent,IndexwindowComponent,PatientSignUpComponent,SignInComponent,PatientHomeComponent,
-DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent]
+DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent,DoctorVideochatDashboardComponent,
+PatientVideochatDashboardComponent,PatientAppointmentsComponent]

@@ -33,6 +33,7 @@
     "dateformat": "^3.0.3",
     "ngx-material-timepicker": "^2.13.0",
     "rxjs": "~6.3.3",
+    "simple-peer": "^9.2.1",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.26"
   },

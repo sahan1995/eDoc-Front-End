@@ -1,0 +1,24 @@
+.filter{
+  float: right;
+}
+.mainDiv{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 2px;
+}
+.img{
+  height: 200px;
+  width: 200px;
+  border-radius: 12px;
+  border: 1px solid gray;
+}
+.appdiv{
+  margin-bottom: 20px;
+}
+agm-map{
+  border-radius: 15px;
+  height: 500px;
+  /*width: 300px;*/
+}

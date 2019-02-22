@@ -145,6 +145,7 @@ export class DoctorAppointmentsComponent implements OnInit {
       // this.appointDetails["appCode"] = appoint.patientDTO.fname;
       // console.log(appoint.patientDTO.fname)
       this.appointDetails = appoint;
+      appoint["PID"] = appoint.patientDTO.pid;
       appoint["patientName"] = appoint.patientDTO.fname + " " + appoint.patientDTO.lname;
       appoint["lat"] = appoint.patientDTO.lat;
       appoint["lng"] = appoint.patientDTO.lng;

@@ -32,7 +32,13 @@ import {MatListModule} from '@angular/material/list';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import {MatRadioModule} from '@angular/material/radio';
 import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appointments.component';
-import { AgmDirectionModule } from 'agm-direction'
+import { AgmDirectionModule } from 'agm-direction';
+import { DoctorVideochatDashboardComponent } from './doctor-videochat-dashboard/doctor-videochat-dashboard.component';
+// import { PatientComponent } from './patient/patient.component';
+import { PatientVideochatDashboardComponent } from './patient-videochat-dashboard/patient-videochat-dashboard.component'
+import {VideoChatService} from "./service/video-chat.service";
+import { PatientAppointmentsComponent } from './patient-appointments/patient-appointments.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +50,10 @@ import { AgmDirectionModule } from 'agm-direction'
     DoctorHomeComponent,
     ConsultDoctorComponent,
     DoctorDetailComponent,
-    DoctorAppointmentsComponent
+    DoctorAppointmentsComponent,
+    DoctorVideochatDashboardComponent,
+    PatientVideochatDashboardComponent,
+    PatientAppointmentsComponent
 
 
   ],
@@ -79,7 +88,7 @@ import { AgmDirectionModule } from 'agm-direction'
 
 
   ],
-  providers: [],
+  providers: [VideoChatService],
   bootstrap: [AppComponent],
   entryComponents:[PatientSignUpComponent]
 })
