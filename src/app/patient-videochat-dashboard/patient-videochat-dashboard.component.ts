@@ -21,6 +21,7 @@ export class PatientVideochatDashboardComponent implements OnInit {
   private PID;
   private DID;
   private appCode
+  private callConnected = false;
   constructor(private videoChat:VideoChatService, private patientVideoChatSer:PatientVideochatService,
               private route:Router,private Aroute: ActivatedRoute,) {
   }
@@ -36,11 +37,11 @@ export class PatientVideochatDashboardComponent implements OnInit {
     this.PID = localStorage.getItem("id");
     this.DID = this.Aroute.snapshot.params.id;
     this.appCode = this.Aroute.snapshot.params.appCode;
-
+    console.log(this.appCode)
 
     console.log(this.DID+" "+this.appCode)
 
-    let video = this.myVideo.nativeElement;
+    // let video = this.myVideo.nativeElement;
     this.peer = new Peer({key: "p17fpt3b2vnuq5mi"})
     setTimeout(() => {
       this.myPeerID = this.peer.id;
@@ -81,23 +82,26 @@ export class PatientVideochatDashboardComponent implements OnInit {
   getDoctorKey(){
 
     this.patientVideoChatSer.getDoctorKey(this.DID).subscribe(result=>{
-      console.log(result);
+        this.videoConnect(result)
     })
 
   }
 
 
-  videoConnect() {
+  videoConnect(doctorKey) {
+    this.callConnected = true;
     let video = this.myVideo.nativeElement;
     var localvar = this.peer;
-    var fname = this.anotherid;
+    var key = doctorKey
+    // var fname = this.anotherid;
 
     var n = <any>navigator;
     n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
 
     n.getUserMedia({video:true,audio:true},function (stream) {
-      var call = localvar.call(fname,stream);
+      var call = localvar.call(key,stream);
       call.on('stream',function (remotestream) {
+
         video.src = URL.createObjectURL(remotestream)
         video.play();
       })

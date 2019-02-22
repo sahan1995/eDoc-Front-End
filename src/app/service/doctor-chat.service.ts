@@ -20,4 +20,15 @@ export class DoctorChatService {
     return this.http.get(this.url+"patients/getVideoKey?PID="+PID)
   }
 
+
+
+  addMedialReport(report){
+   return this.http.put(this.url+"medicalReports",report);
+  }
+
+  getMedicalReport(){
+    return this.http.get(this.url+"medicalReports");
+  }
+
+
 }

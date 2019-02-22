@@ -1,6 +1,9 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {VideoChatService} from "../service/video-chat.service";
 import {DoctorChatService} from "../service/doctor-chat.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {count} from "rxjs/operators";
+import {DatePipe} from "@angular/common";
 
 declare var Peer: any;
 
@@ -19,11 +22,46 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   myPeerID;
   private patientKey
   private DID;
-  constructor(private videoChat:VideoChatService,private doctorChatService:DoctorChatService) {
+  private PIP;
+  private appCode
+  private count=1;
+  private arry;
+
+  private drug="";
+  private meal;
+  private morning=false;
+  private afternoon = false;
+  private evening = false;
+  private night = false;
+  private qty ="";
+  private days="";
+
+
+  constructor(private videoChat:VideoChatService,private doctorChatService:DoctorChatService,private route:Router,private Aroute: ActivatedRoute) {
   }
+
+  curDate = new Date();
+  dateFormat = require('dateformat');
+  pipe = new DatePipe('en-US');
+  myFormattedDate = this.pipe.transform(this.curDate, 'yyyy-MM-dd');
+  time = this.dateFormat(this.curDate, "h:MM:ss TT");
 
 
   ngOnInit() {
+  console.log(this.morning)
+
+    this.arry = Array(this.count).fill(0).map((x,i)=>i);
+    if (localStorage.getItem("fname") == null) {
+      this.route.navigate(["/SignIn"])
+      return;
+    }
+    this.user_Full_Name = localStorage.getItem("fname") + " " + localStorage.getItem("lname");
+    this.DID = localStorage.getItem("id");
+
+    this.PID = this.Aroute.snapshot.params.id;
+    this.appCode = this.Aroute.snapshot.params.appCode;
+
+
     let video = this.myVideo.nativeElement;
     this.DID = localStorage.getItem('id')
     this.peer = new Peer({key: "p17fpt3b2vnuq5mi"})
@@ -87,5 +125,33 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   }
   updateKey(DID,key){
     this.doctorChatService.updateKey(DID,key).subscribe(result=>{})
+  }
+
+
+  addTextBox(){
+    this.count++;
+    this.arry = Array(this.count).fill(0).map((x,i)=>i);
+
+
+  }
+
+  submitPrescription(prescriptionForm){
+
+    let precription = prescriptionForm.value;
+    this.morning = false;
+    precription["appCode"] = this.appCode;
+    precription ["meal"] = this.meal;
+    precription["date"] = this.myFormattedDate;
+    console.log(precription)
+
+    // this.doctorChatService.addMedialReport(precription).subscribe(result=>{})
+    this.doctorChatService.getMedicalReport().subscribe(result=>{
+      console.log(result)
+    })
+  }
+
+
+  selectMeal(meal){
+    this.meal = meal;
   }
 }
