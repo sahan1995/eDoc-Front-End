@@ -34,6 +34,7 @@ import {MatRadioModule} from '@angular/material/radio';
 import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appointments.component';
 import { AgmDirectionModule } from 'agm-direction';
 import { DoctorVideochatDashboardComponent } from './doctor-videochat-dashboard/doctor-videochat-dashboard.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 // import { PatientComponent } from './patient/patient.component';
 import { PatientVideochatDashboardComponent } from './patient-videochat-dashboard/patient-videochat-dashboard.component'
 import {VideoChatService} from "./service/video-chat.service";
@@ -84,7 +85,7 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
     MatCheckboxModule,
     MatRadioModule,
     AgmDirectionModule,
-
+    MatSnackBarModule
 
 
   ],

@@ -4,6 +4,7 @@ import {DoctorChatService} from "../service/doctor-chat.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {count} from "rxjs/operators";
 import {DatePipe} from "@angular/common";
+import {MatSnackBar} from "@angular/material";
 
 declare var Peer: any;
 
@@ -22,11 +23,10 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   myPeerID;
   private patientKey
   private DID;
-  private PIP;
   private appCode
   private count=1;
   private arry;
-
+  private PID;
   private drug="";
   private meal;
   private morning=false;
@@ -35,9 +35,12 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   private night = false;
   private qty ="";
   private days="";
-
-
-  constructor(private videoChat:VideoChatService,private doctorChatService:DoctorChatService,private route:Router,private Aroute: ActivatedRoute) {
+  private pressID;
+  private prescAdded = false;
+  private lastID;
+  private prescription :any;
+  constructor(private videoChat:VideoChatService,private doctorChatService:DoctorChatService,private route:Router,private Aroute: ActivatedRoute,
+              private snackBar: MatSnackBar) {
   }
 
   curDate = new Date();
@@ -62,19 +65,29 @@ export class DoctorVideochatDashboardComponent implements OnInit {
     this.appCode = this.Aroute.snapshot.params.appCode;
 
 
+
     let video = this.myVideo.nativeElement;
     this.DID = localStorage.getItem('id')
+
+    //---------------------------------------------------------------------------
+    //Get this side peer id and update it in to the data base
     this.peer = new Peer({key: "p17fpt3b2vnuq5mi"})
     setTimeout(() => {
       this.myPeerID = this.peer.id;
       this.updateKey(this.DID,this.myPeerID);
     }, 1000)
-    this.peer.on('connection', function (conn) {
-      conn.on('data', function (data) {
+    //----------------------------------------------------------------------------
 
-        console.log(data);
-      })
-    })
+
+    // this.peer.on('connection', function (conn) {
+    //   conn.on('data', function (data) {
+    //
+    //     console.log(data);
+    //   })
+    // })
+
+    //--------------------------------------------------------------------------
+    //Answer the request come from other end
     var n = <any>navigator;
     n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
     this.peer.on('call',function (call) {
@@ -88,21 +101,24 @@ export class DoctorVideochatDashboardComponent implements OnInit {
         console.log('Failed to get local stream' ,err);
       })
     })
+    //-----------------------------------------------------------------------------
     this.getPatientKey();
   }
 
-  connect() {
-    var conn = this.peer.connect(this.anotherid);
-    conn.on('open', function () {
-      conn.send('hi')
-    })
-  }
+  // connect() {
+  //   var conn = this.peer.connect(this.anotherid);
+  //   conn.on('open', function () {
+  //     conn.send('hi')
+  //   })
+  // }
 
-  videoConnect() {
+  //--------------------------------------------------------------------------
+  //Connect to the the other id and video call
+  videoConnect(key) {
     let video = this.myVideo.nativeElement;
     var localvar = this.peer;
-    var fname = this.anotherid;
-
+    var fname =key;
+    console.log(fname)
     var n = <any>navigator;
     n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
 
@@ -115,12 +131,13 @@ export class DoctorVideochatDashboardComponent implements OnInit {
     },function (err) {
       console.log('Failed to get local stream' ,err);
     })
-
+  //-------------------------------------------------------------------------------
   }
 
+
   getPatientKey(){
-    this.videoChat.cast.subscribe(result=>{
-      this.patientKey = result;
+    this.doctorChatService.getPatientKey(this.PID).subscribe(result=>{
+      this.videoConnect(result)
     })
   }
   updateKey(DID,key){
@@ -135,23 +152,75 @@ export class DoctorVideochatDashboardComponent implements OnInit {
 
   }
 
-  submitPrescription(prescriptionForm){
+  submitPrescription(drugForm){
 
-    let precription = prescriptionForm.value;
-    this.morning = false;
-    precription["appCode"] = this.appCode;
-    precription ["meal"] = this.meal;
-    precription["date"] = this.myFormattedDate;
-    console.log(precription)
+    let drug = drugForm.value;
+    var nums;
 
-    // this.doctorChatService.addMedialReport(precription).subscribe(result=>{})
-    this.doctorChatService.getMedicalReport().subscribe(result=>{
-      console.log(result)
-    })
+      this.doctorChatService.getPrescriptionLastId().subscribe(result=>{
+        if(this.prescAdded==false){
+          this.lastID = result;
+          var num =  parseInt(this.lastID)+1;
+          nums = 222;
+          this.pressID = "Pres" + num;
+          this.prescription={
+            prescriptionID : this.pressID,
+            date:this.myFormattedDate
+          }
+          this.addPrespription(this.pressID,this.prescription)
+        }
+
+
+        console.log(this.prescription)
+        drug["meal"] = this.meal;
+        drug["prescriptionDTO"] = this.prescription
+        this.doctorChatService.addDrug(this.pressID,drug).subscribe(result=>{
+          if(result){
+              this.morning = false;
+              this.afternoon = false;
+              this.night = false;
+              this.evening = false;
+              this.drug = "";
+              this.qty = "";
+              this.days = ""
+              this.snackBar.open("Drug Added", "",{
+                duration: 5000,
+              });
+          }
+        });
+
+      })
   }
 
 
   selectMeal(meal){
     this.meal = meal;
   }
+
+  addPrespription(presID,prescription){
+
+    this.doctorChatService.addPrescription(presID,this.appCode,prescription).subscribe(result=>{
+      if(result==true){
+        this.prescAdded = true;
+      }
+    })
+  }
+
+  finishAppointment(){
+      console.log(this.patientKey)
+    var conn = this.peer.connect(this.patientKey);
+    conn.on('open', function () {
+      conn.send("hello")
+    })
+    // this.route.navigate(["Doctor-Appointment"])
+
+    // this.route.navigateByUrl('/Doctor-VideoChat-DashBoard', {skipLocationChange: true}).then(()=>
+    //   this.route.navigate(["Doctor-Appointment"]));
+    // this.doctorChatService.finishAppointment(this.appCode).subscribe(result=>{
+    //   if(result){
+    //
+    //   }
+    // })
+  }
+
 }

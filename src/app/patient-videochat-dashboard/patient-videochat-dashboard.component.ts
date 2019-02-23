@@ -50,8 +50,7 @@ export class PatientVideochatDashboardComponent implements OnInit {
     }, 1000)
     this.peer.on('connection', function (conn) {
       conn.on('data', function (data) {
-
-        console.log(data);
+      console.log(data)
       })
     })
     var n = <any>navigator;

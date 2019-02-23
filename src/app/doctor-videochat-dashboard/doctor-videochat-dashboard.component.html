@@ -498,8 +498,8 @@
           <!--<img src="assets/Netflix_LoadTime.gif" style="width: 1000px;height: 500px;" *ngIf="!callConnected">-->
           <br><br>
 
-          <button (click)="getDoctorKey()" mat-raised-button color="primary">Connect Patient</button>&nbsp;
-          <button mat-raised-button color="warn">End Call</button>
+          <button (click)="videoConnect()" mat-raised-button color="primary" >Connect Patient</button>&nbsp;
+          <button mat-raised-button color="warn" (click)="finishAppointment()">Finish Appointment</button>
 
           <br><br><br><br>
         </div>

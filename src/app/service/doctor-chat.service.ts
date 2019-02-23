@@ -17,18 +17,45 @@ export class DoctorChatService {
   }
 
   getPatientKey(PID){
-    return this.http.get(this.url+"patients/getVideoKey?PID="+PID)
+    const httpOptions = {
+      'responseType'  : 'text' as 'json'
+
+    };
+    return this.http.get(this.url+"patients/getVideoKey?PID="+PID,httpOptions)
   }
 
 
+  addDrug(presID,drug){
+    return this.http.put(this.url+"drugs?presID="+presID,drug);
+  }
 
-  addMedialReport(report){
-   return this.http.put(this.url+"medicalReports",report);
+  addMedialReport(appCode,report){
+
+
+    return this.http.put(this.url+"medicalReports/"+appCode,report);
   }
 
   getMedicalReport(){
     return this.http.get(this.url+"medicalReports");
   }
 
+  getAppointment(appCode){
 
+    return this.http.get(this.url+"appointments/"+appCode);
+  }
+
+
+  addPrescription(presID,appCode,prescription){
+
+    return this.http.put(this.url+"prescription/"+presID+"?appCode="+appCode,prescription)
+  }
+
+  getPrescriptionLastId(){
+
+    return this.http.get(this.url+"prescription/getLastID");
+  }
+
+  finishAppointment(appCode){
+    return this.http.post(this.url+"appointments/finishAppointment?appCode="+appCode);
+  }
 }
