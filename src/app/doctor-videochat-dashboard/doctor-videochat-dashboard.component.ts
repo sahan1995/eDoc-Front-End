@@ -205,7 +205,7 @@ export class DoctorVideochatDashboardComponent implements OnInit {
       }
     })
   }
-
+e
   finishAppointment(){
       console.log(this.patientKey)
     var conn = this.peer.connect(this.patientKey);

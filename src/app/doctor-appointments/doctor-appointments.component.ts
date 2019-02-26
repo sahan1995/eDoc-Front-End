@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {DoctorAppointmentsService} from "../service/doctor-appointments.service";
 import {DatePipe} from "@angular/common";
-
+import {Observable} from "rxjs/Observable";
+import 'rxjs/add/observable/interval';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/switchMap';
 @Component({
   selector: 'app-doctor-appointments',
   templateUrl: './doctor-appointments.component.html',
@@ -10,6 +13,7 @@ import {DatePipe} from "@angular/common";
 })
 export class DoctorAppointmentsComponent implements OnInit {
 
+  @Input() appoint:Observable<any>;
   // mydate = new Date();
   constructor(private route: Router, private doctorAppSer: DoctorAppointmentsService) {
 
@@ -34,6 +38,7 @@ export class DoctorAppointmentsComponent implements OnInit {
 
   ngOnInit() {
 
+
     // this.mydate = this.datePipe.transform(this.mydate,"yyyy-MM-dd");
     if (localStorage.getItem("fname") == null) {
       this.route.navigate(["/SignIn"])
@@ -41,6 +46,7 @@ export class DoctorAppointmentsComponent implements OnInit {
     }
     this.user_Full_Name = localStorage.getItem("fname") + " " + localStorage.getItem("lname");
     this.DID = localStorage.getItem("id");
+    this.appoint = Observable.interval(1000).startWith(0).switchMap(()=>this.doctorAppSer.getDoctorAppointments(this.DID))
 
     this.getDoctorAppointments(this.DID);
 

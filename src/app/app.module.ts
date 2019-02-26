@@ -35,10 +35,14 @@ import { DoctorAppointmentsComponent } from './doctor-appointments/doctor-appoin
 import { AgmDirectionModule } from 'agm-direction';
 import { DoctorVideochatDashboardComponent } from './doctor-videochat-dashboard/doctor-videochat-dashboard.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatChipsModule} from '@angular/material/chips';
+
 // import { PatientComponent } from './patient/patient.component';
 import { PatientVideochatDashboardComponent } from './patient-videochat-dashboard/patient-videochat-dashboard.component'
 import {VideoChatService} from "./service/video-chat.service";
 import { PatientAppointmentsComponent } from './patient-appointments/patient-appointments.component';
+import { FindDoctorComponent } from './find-doctor/find-doctor.component';
+import {MatIconModule} from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -54,7 +58,8 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
     DoctorAppointmentsComponent,
     DoctorVideochatDashboardComponent,
     PatientVideochatDashboardComponent,
-    PatientAppointmentsComponent
+    PatientAppointmentsComponent,
+    FindDoctorComponent
 
 
   ],
@@ -85,7 +90,9 @@ import { PatientAppointmentsComponent } from './patient-appointments/patient-app
     MatCheckboxModule,
     MatRadioModule,
     AgmDirectionModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatChipsModule,
+    MatIconModule
 
 
   ],
