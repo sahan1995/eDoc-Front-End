@@ -1,6 +1,5 @@
-
 <body class="hold-transition skin-blue sidebar-mini">
-
+<div class="wrapper">
 
   <header class="main-header">
     <!-- Logo -->
@@ -219,13 +218,15 @@
           <!-- User Account: style can be found in dropdown.less -->
           <li class="dropdown user user-menu">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+              <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="user-image"
+                   alt="User Image">
               <span class="hidden-xs">{{fullName}}</span>
             </a>
             <ul class="dropdown-menu">
               <!-- User image -->
               <li class="user-header">
-                <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                <img src="https://almsaeedstudio.com/themes/AdminLTE/dist/img/user2-160x160.jpg" class="img-circle"
+                     alt="User Image">
 
                 <p>
                   Mr {{fullName}}
@@ -240,7 +241,7 @@
                   <a href="#" class="btn btn-default btn-flat">Profile</a>
                 </div>
                 <div class="pull-right">
-                  <a  class="btn btn-default btn-flat" (click)="signOut()">Sign out</a>
+                  <a class="btn btn-default btn-flat" (click)="signOut()">Sign out</a>
                 </div>
               </li>
             </ul>
@@ -275,8 +276,8 @@
         <li class="active treeview">
 
           <ul class="treeview-menu">
-            <li ><a routerLink="/Consult-Doctor" ><i class="fa fa-circle-o"></i> Consult a Doctor </a></li>
-            <li><a routerLink="/Patient-Appointment" ><i class="fa fa-circle-o"></i> My Appointments</a></li>
+            <li><a routerLink="/Consult-Doctor"><i class="fa fa-circle-o"></i> Consult a Doctor </a></li>
+            <li><a routerLink="/Patient-Appointment"><i class="fa fa-circle-o"></i> My Appointments</a></li>
           </ul>
         </li>
         <li class="treeview" class="active">
@@ -449,58 +450,86 @@
     </section>
     <br><br>
 
-    <div class="col-lg-9">
-      <mat-checkbox [(ngModel)]="isAdult">14+</mat-checkbox><br>
-      <mat-form-field class="example-chip-list">
-        <mat-chip-list #chipList>
-          <mat-chip *ngFor="let symptom of symstoms" [selectable]="selectable"
-                    [removable]="removable" (removed)="remove(symptom)">
-            {{symptom.name}}
-            <mat-icon matChipRemove *ngIf="removable"><b>&#x2716;</b></mat-icon>
-          </mat-chip>
-          <input placeholder="Enter Your Symptoms"
-                 [matChipInputFor]="chipList"
-                 [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                 [matChipInputAddOnBlur]="addOnBlur"
-                 (matChipInputTokenEnd)="add($event)">
-        </mat-chip-list>
-      </mat-form-field>
+    <section class="content">
+      <div class="row w3-container w3-center mainDiv">
 
-    </div>
-    <div class="col-lg-3">
-      <button mat-raised-button="" (click)="findDoctor()">Find Doctor</button>
+        <div class="col-lg-12">
+        <div class="col-lg-9">
 
-    </div>
+          <br>
+          <mat-checkbox [(ngModel)]="isChild" style="float: left">Check if Patient is less than 14 Years</mat-checkbox>
+          <mat-form-field class="example-chip-list">
+            <mat-chip-list #chipList>
+              <mat-chip *ngFor="let symptom of symstoms" [selectable]="selectable"
+                        [removable]="removable" (removed)="remove(symptom)">
+                {{symptom.name}}
+                <mat-icon matChipRemove *ngIf="removable"><b>&#x2716;</b></mat-icon>
+              </mat-chip>
+              <input placeholder="Enter Your Symptoms"
+                     [matChipInputFor]="chipList"
+                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                     [matChipInputAddOnBlur]="addOnBlur"
+                     (matChipInputTokenEnd)="add($event)">
+            </mat-chip-list>
+          </mat-form-field>
 
-
-
-    <!--<div class="col-lg-12" *ngFor="let  d of doct">-->
-      <!--<h2>{{d[0].fname}}    {{d[0].lname}}</h2>-->
-
-    <!--</div>-->
-
-  <div class="col-lg-12" >
-
-
-    <div class="col-lg-4" *ngFor="let  d of doct">
-      <div class="card">
-        <img class=" card-img-top  " src={{d[0].patientPic}} alt="Card image" >
-        <div class="card-body">
-          <h4 class="card-title">Dr {{d[0].fname+ " " +d[0].test}}</h4>
-          <p class="card-text">Some example text.</p>
-          <a href="#" class="btn btn-primary">See Profile</a>
         </div>
+        <div class="col-lg-3">
+          <br><br>
+          <button mat-raised-button="" (click)="findDoctor()">Find Doctor</button>
+
+        </div>
+        </div>
+
+        <!--<div class="col-lg-12" *ngFor="let  d of doct">-->
+        <!--<h2>{{d[0].fname}}    {{d[0].lname}}</h2>-->
+
+        <!--</div>-->
+
+        <div class="col-lg-12">
+          <mat-form-field *ngIf="doctors!=null" style="float: left; width: 100%" >
+            <mat-select placeholder="Select Catagory" #special (valueChange)="filter(special.value)">
+              <mat-option value="All">All Doctors</mat-option>
+              <mat-option *ngFor="let doc of doctorsForSepect"  [value]="doc.special" >
+                {{doc.special}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-lg-12">
+
+
+          <!--<mat-chip-list >-->
+            <!--<mat-chip>ssssssss</mat-chip>-->
+            <!--<mat-chip>ssssssss</mat-chip>-->
+          <!--</mat-chip-list>-->
+
+          <div class="col-lg-4 w3-animate-opacity " *ngFor="let  d of doct">
+            <br>
+            <div class="card profileCard ">
+              <img class="  img" src={{d[0].patientPic}} alt="Card image">
+              <div class="card-body">
+                <h4 class="card-title">Dr {{d[0].fname+ " " +d[0].lname}}</h4>
+                <p class="card-text"><b>{{d[0].specilizedIn}}</b></p>
+                <a [routerLink]="['/Doctor-Detail',d[0].did]" class="btn btn-primary">See Profile</a>
+              </div>
+            </div>
+            <br>
+          </div>
+
+
+        </div>
+
+
       </div>
-    </div>
 
 
-  </div>
+    </section>
 
     <!-- Main content -->
 
     <!-- /.content -->
   </div>
-
 
 
   <!-- /.content-wrapper -->
@@ -512,7 +541,7 @@
   <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
 
-
+</div>
 <!-- ./wrapper -->
 </body>
 

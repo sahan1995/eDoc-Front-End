@@ -43,7 +43,8 @@ import {VideoChatService} from "./service/video-chat.service";
 import { PatientAppointmentsComponent } from './patient-appointments/patient-appointments.component';
 import { FindDoctorComponent } from './find-doctor/find-doctor.component';
 import {MatIconModule} from '@angular/material/icon';
-
+import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
+import {MatSelectModule} from '@angular/material/select';
 @NgModule({
   declarations: [
     AppComponent,
@@ -92,7 +93,9 @@ import {MatIconModule} from '@angular/material/icon';
     AgmDirectionModule,
     MatSnackBarModule,
     MatChipsModule,
-    MatIconModule
+    MatIconModule,
+    MatBottomSheetModule,
+    MatSelectModule
 
 
   ],
