@@ -4,6 +4,7 @@ import {FormControl} from '@angular/forms';
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import {ConsultDoctorService} from "../service/consult-doctor.service";
+import {MatSnackBar} from "@angular/material";
 
 
 @Component({
@@ -17,13 +18,16 @@ export class ConsultDoctorComponent implements OnInit {
   public profilePic;
   public picArray = [];
 
-  public picArr:Array<String>;
-  constructor(private route: Router, private conDoc: ConsultDoctorService) {
+  public picArr: Array<String>;
+
+  constructor(private route: Router, private conDoc: ConsultDoctorService, private snackBar: MatSnackBar) {
 
   }
 
   private fullName;
-
+  private PID;
+  private sendRequest = false;
+  private isReqeust;
   ngOnInit() {
 
 
@@ -34,6 +38,7 @@ export class ConsultDoctorComponent implements OnInit {
     }
 
     this.fullName = localStorage.getItem("fname") + " " + localStorage.getItem("lname");
+    this.PID = localStorage.getItem("id");
   }
 
 
@@ -42,14 +47,28 @@ export class ConsultDoctorComponent implements OnInit {
       this.doctors = result;
       this.doctors.forEach(doc => {
 
-        this.conDoc.getProPic(doc.profilePic).subscribe(result=>{
+        this.conDoc.isFamDoc(this.PID,doc["did"]).subscribe(isPresent=>{
+            this.conDoc.isSendRequest(this.PID,doc["did"]).subscribe(isSendRequest=>{
 
-          let reader= new FileReader();
-          reader.addEventListener("load",()=>{
-            doc["img"]=reader.result;
-          },false)
-          if(result){
-            const  img = result as Blob
+              if(isPresent==false&&isSendRequest==false){
+                doc["sendRequest"] = true;
+              }else if(isSendRequest&&isPresent){
+                doc["sendRequest"] = false;
+                doc["remove"] = true;
+              }else if(isSendRequest){
+                doc["cancleRequest"] = true;
+              }
+            })
+        })
+        this.conDoc.getProPic(doc.profilePic).subscribe(resultImg => {
+
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            doc["img"] = reader.result;
+
+          }, false)
+          if (resultImg) {
+            const img = resultImg as Blob
             reader.readAsDataURL(img)
           }
 
@@ -57,7 +76,6 @@ export class ConsultDoctorComponent implements OnInit {
 
 
       })
-
 
 
       // this.getProPic(result.profilePic)
@@ -76,7 +94,7 @@ export class ConsultDoctorComponent implements OnInit {
     let reader = new FileReader();
     reader.addEventListener("load", () => {
       // console.log(reader.result)
-      this.profilePic =   reader.result;
+      this.profilePic = reader.result;
 
       return this.profilePic;
 
@@ -91,9 +109,90 @@ export class ConsultDoctorComponent implements OnInit {
   }
 
 
-  profile(){
+  profile() {
     return this.profilePic;
   }
 
+  findDoctor(parm) {
+
+    this.conDoc.findDoctor(parm).subscribe(result=>{
+      this.doctors = result;
+      this.doctors.forEach(doc => {
+        this.conDoc.isFamDoc(this.PID,doc["did"]).subscribe(isPresent=>{
+          this.conDoc.isSendRequest(this.PID,doc["did"]).subscribe(isSendRequest=>{
+
+            if(isPresent==false&&isSendRequest==false){
+              doc["sendRequest"] = true;
+            }else if(isSendRequest&&isPresent){
+              doc["sendRequest"] = false;
+              doc["remove"] = true;
+            }else if(isSendRequest){
+              doc["cancleRequest"] = true;
+            }
+          })
+
+        })
+        this.conDoc.getProPic(doc.profilePic).subscribe(result => {
+
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            doc["img"] = reader.result;
+          }, false)
+          if (result) {
+            const img = result as Blob
+            reader.readAsDataURL(img)
+          }
+
+        })
+
+
+      })
+    })
+
+  }
+
+  send(DID){
+
+    console.log(DID)
+    this.conDoc.sendRequest(this.PID,DID).subscribe(result=>{
+
+      if(result){
+
+        this.doctors.forEach(doc=>{
+          if(doc["did"]==DID){
+            doc["sendRequest"]=false;
+            doc["cancleRequest"] = true;
+          }
+        })
+
+        this.snackBar.open("Request Sent to the Doctor     ", "Ok", {
+          duration: 3000,
+        });
+      }
+
+
+    })
+
+  }
+  deleteReq(DID){
+    this.conDoc.deleteRequest(this.PID,DID).subscribe(result=>{
+
+      if(result){
+
+        this.doctors.forEach(doc=>{
+          if(doc["did"]==DID){
+            doc["sendRequest"]=true;
+            doc["cancleRequest"] = false;
+          }
+        })
+
+        this.snackBar.open("Request Deleted ", "Ok", {
+          duration: 3000,
+        });
+      }
+
+
+    })
+  }
 
 }

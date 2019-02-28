@@ -21,4 +21,27 @@ export class ConsultDoctorService {
     };
     return this.http.get(this.url+"api/v1/doctors/getPic?picName="+picName,httpOptions)
   }
+
+
+
+  findDoctor(param){
+    return this.http.get(this.url+"api/v1/doctors/getDoctor?param="+param);
+  }
+
+  isFamDoc(PID,DID){
+
+    return this.http.get(this.url+"api/v1/patientFamDoc/isFamDoc?PID="+PID+"&DID="+DID);
+  }
+
+  isSendRequest(PID,DID){
+    return this.http.get(this.url+"api/v1/requestForDoctor/isPresent?PID="+PID+"&DID="+DID);
+  }
+
+  sendRequest(PID,DID){
+    return this.http.put(this.url+"api/v1/requestForDoctor?PID="+PID+"&DID="+DID,null);
+  }
+
+  deleteRequest(PID,DID){
+    return this.http.delete(this.url+"api/v1/requestForDoctor?PID="+PID+"&DID="+DID)
+  }
 }

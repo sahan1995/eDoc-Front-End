@@ -223,3 +223,13 @@ form.example::after {
   margin-right: 20px;
   border-radius: 2px;
 }
+.proImg{
+  width: 250px;
+  height: 250px;
+}
+.divCard{
+  margin-bottom: 15px;
+}
+.divMain{
+  margin-top: 20px;
+}
