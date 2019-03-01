@@ -5,7 +5,7 @@
 
   <header class="main-header">
     <!-- Logo -->
-    <a href="index2.html" class="logo">
+    <a routerLink="/Patient-Home" class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
       <span class="logo-mini"><b>A</b>LT</span>
       <!-- logo for regular state and mobile devices -->
@@ -273,31 +273,35 @@
       <!-- sidebar menu: : style can be found in sidebar.less -->
       <ul class="sidebar-menu" data-widget="tree">
         <li class="header">MAIN NAVIGATION</li>
-        <li class="active treeview">
 
-          <ul class="treeview-menu">
-            <li class="active"><a routerLink="/Consult-Doctor" ><i class="fa fa-circle-o"></i> Consult a Doctor </a></li>
-            <li><a href="index2.html"><i class="fa fa-circle-o"></i> Dashboard v2</a></li>
-          </ul>
+        <li class="treeview active">
+          <a routerLink="/Consult-Doctor">
+            <i class="fas fa-user-md"></i>&nbsp;
+            <span>Consult a Doctor</span>
+          </a>
         </li>
         <li class="treeview">
-          <a href="#">
-            <i class="fa fa-files-o"></i>
-            <span>Layout Options</span>
-            <span class="pull-right-container">
-              <span class="label label-primary pull-right">4</span>
-            </span>
+          <a routerLink="/Patient-Appointment">
+            <i class="fas fa-calendar-check"></i>&nbsp;
+            <span> My Appointments</span>
           </a>
-          <ul class="treeview-menu">
-            <li><a href="pages/layout/top-nav.html"><i class="fa fa-circle-o"></i> Top Navigation</a></li>
-            <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> Boxed</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Fixed</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Collapsed Sidebar</a></li>
-          </ul>
+        </li>
+        <!--<li class="active treeview">-->
+
+        <!--<ul class="treeview-menu">-->
+        <!--<li class="active"><a routerLink="/Consult-Doctor" ><i class="fa fa-circle-o"></i> Consult a Doctor </a></li>-->
+        <!--<li><a routerLink="/Patient-Appointment" ><i class="fa fa-circle-o"></i> My Appointments</a></li>-->
+        <!--</ul>-->
+        <!--</li>-->
+        <li class="treeview">
+          <a routerLink="/Find-Doctor">
+            <i class="fa fa-files-o"></i>&nbsp;
+            <span>Find a Doctor</span>
+          </a>
         </li>
         <li>
           <a href="pages/widgets.html">
-            <i class="fa fa-th"></i> <span>Widgets</span>
+            <i class="fa fa-th"></i> &nbsp;<span>My Doctors</span>
             <span class="pull-right-container">
               <small class="label pull-right bg-green">new</small>
             </span>

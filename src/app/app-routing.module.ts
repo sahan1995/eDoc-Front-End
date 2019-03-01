@@ -15,6 +15,7 @@ import {DoctorVideochatDashboardComponent} from "./doctor-videochat-dashboard/do
 import {PatientVideochatDashboardComponent} from "./patient-videochat-dashboard/patient-videochat-dashboard.component";
 import {PatientAppointmentsComponent} from "./patient-appointments/patient-appointments.component";
 import {FindDoctorComponent} from "./find-doctor/find-doctor.component";
+import {DoctorRequestsComponent} from "./doctor-requests/doctor-requests.component";
 
 const routes: Routes = [
   {path :'',redirectTo:'home',pathMatch:'full'},
@@ -31,6 +32,7 @@ const routes: Routes = [
   {path :'Patient-VideoChat-DashBoard/:id/:appCode',component:PatientVideochatDashboardComponent},
   {path :'Patient-Appointment',component:PatientAppointmentsComponent},
   {path :'Find-Doctor',component:FindDoctorComponent},
+  {path :'Doctor-Requests',component:DoctorRequestsComponent},
   {path:'',component:IndexwindowComponent}
 ];
 
@@ -41,4 +43,4 @@ const routes: Routes = [
 export class AppRoutingModule { }
 export const routingComponents=[RegisterComponent,IndexwindowComponent,PatientSignUpComponent,SignInComponent,PatientHomeComponent,
 DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent,DoctorVideochatDashboardComponent,
-PatientVideochatDashboardComponent,PatientAppointmentsComponent,FindDoctorComponent]
+PatientVideochatDashboardComponent,PatientAppointmentsComponent,FindDoctorComponent,DoctorRequestsComponent]

@@ -45,6 +45,7 @@ import { FindDoctorComponent } from './find-doctor/find-doctor.component';
 import {MatIconModule} from '@angular/material/icon';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSelectModule} from '@angular/material/select';
+import { DoctorRequestsComponent } from './doctor-requests/doctor-requests.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,8 @@ import {MatSelectModule} from '@angular/material/select';
     DoctorVideochatDashboardComponent,
     PatientVideochatDashboardComponent,
     PatientAppointmentsComponent,
-    FindDoctorComponent
+    FindDoctorComponent,
+    DoctorRequestsComponent
 
 
   ],
