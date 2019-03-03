@@ -44,4 +44,15 @@ export class ConsultDoctorService {
   deleteRequest(PID,DID){
     return this.http.delete(this.url+"api/v1/requestForDoctor?PID="+PID+"&DID="+DID)
   }
+
+  removeDoctorFromRequest(PID,DID){
+    return this.http.delete((this.url+"api/v1/requestForDoctor/removeDoctor?PID="+PID+"&DID="+DID))
+  }
+
+
+  removeDoctor(PID,DID){
+
+    return this.http.delete(this.url+"api/v1/patientFamDoc?PID="+PID+"&DID="+DID);
+
+  }
 }

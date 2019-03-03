@@ -46,6 +46,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSelectModule} from '@angular/material/select';
 import { DoctorRequestsComponent } from './doctor-requests/doctor-requests.component';
+import { RegisterPrivatePracticeComponent } from './register-private-practice/register-private-practice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -62,7 +63,8 @@ import { DoctorRequestsComponent } from './doctor-requests/doctor-requests.compo
     PatientVideochatDashboardComponent,
     PatientAppointmentsComponent,
     FindDoctorComponent,
-    DoctorRequestsComponent
+    DoctorRequestsComponent,
+    RegisterPrivatePracticeComponent
 
 
   ],

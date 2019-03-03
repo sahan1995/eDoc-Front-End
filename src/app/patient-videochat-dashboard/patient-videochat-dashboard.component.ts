@@ -22,6 +22,8 @@ export class PatientVideochatDashboardComponent implements OnInit {
   private DID;
   private appCode
   private callConnected = false;
+  private drugs :any;
+  private showPres = false;
   constructor(private videoChat:VideoChatService, private patientVideoChatSer:PatientVideochatService,
               private route:Router,private Aroute: ActivatedRoute,) {
   }
@@ -125,5 +127,13 @@ export class PatientVideochatDashboardComponent implements OnInit {
       this.patientVideoChatSer.updateKey(this.PID,key).subscribe(result=>{})
     }
 
+    endCallAndShowPrescription(){
+
+    this.showPres = true;
+    this.patientVideoChatSer.getPrescription(this.appCode).subscribe(result=>{
+      this.drugs = result.drugs;
+    })
+
+    }
 
 }

@@ -478,7 +478,7 @@
           <p><button class="bookNow" [routerLink]="['/Doctor-Detail',doc.did]">Book Now</button></p>
 
           <button mat-raised-button color="primary" *ngIf="doc.sendRequest" (click)="send(doc.did)">Add as Family Doctor</button>&nbsp;
-          <button mat-raised-button color="warn" *ngIf="doc.remove">Remove</button>
+          <button mat-raised-button color="warn" *ngIf="doc.remove" (click)="removeDoctor(doc.did)">Remove</button>
           <button mat-raised-button color="accent" *ngIf="doc.cancleRequest" (click)="deleteReq(doc.did)">Cancle Request</button>
     <br>  <br>
         </div>

@@ -21,4 +21,11 @@ export class PatientVideochatService {
     };
     return this.http.get(this.url+"doctors/getVideoKey?DID="+DID,httpOptions)
   }
+
+
+
+  getPrescription(appCode){
+
+    return this.http.get(this.url+"prescription/getPres?appCode="+appCode)
+  }
 }

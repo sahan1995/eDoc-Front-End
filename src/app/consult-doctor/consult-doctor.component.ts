@@ -194,5 +194,32 @@ export class ConsultDoctorComponent implements OnInit {
 
     })
   }
+  removeDoctor(DID){
+
+    console.log(DID)
+    this.conDoc.removeDoctorFromRequest(this.PID,DID).subscribe(result=>{
+      if(result){
+        this.conDoc.removeDoctor(this.PID,DID).subscribe(result=>{
+          if(result){
+
+            console.log(DID)
+            this.doctors.forEach(doc=>{
+
+              if(doc["did"]==DID){
+                console.log("HERE")
+                doc["sendRequest"]=true;
+                doc["cancleRequest"] = false;
+                doc["remove"] = false;
+              }
+            })
+            this.snackBar.open("Doctor Removed ", "Ok", {
+              duration: 3000,
+            });
+          }
+        })
+      }
+    })
+
+  }
 
 }

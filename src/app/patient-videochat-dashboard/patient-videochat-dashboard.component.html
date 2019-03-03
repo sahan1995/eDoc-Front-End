@@ -499,15 +499,42 @@
         </div>
 
         <button (click)="getDoctorKey()" mat-raised-button color="primary">Connect  Doctor</button>&nbsp;
-        <button mat-raised-button color="warn">End Call</button>
+        <button mat-raised-button color="warn" (click)="endCallAndShowPrescription()">End Call</button>
 
       <br><br><br><br>
+
       </div>
+      <br>
+      <div class="col-lg-12 appdiv" *ngIf="showPres">
 
-      <div class="col-lg-12 appdiv ">
+        <table class="table table-hover">
+          <thead>
+          <tr>
+            <th>Drug</th>
+            <th>Meal</th>
+            <th>Morning</th>
+            <th>Afternoon</th>
+            <th>Evening</th>
+            <th>Night</th>
+            <th>Qty</th>
+            <th>Days</th>
+          </tr>
+          </thead>
+          <tbody *ngFor="let drug of drugs">
+          <tr>
+            <td>{{drug.drug}}</td>
+            <td>{{drug.meal}}</td>
+            <td><mat-checkbox disabled [(ngModel)]="drug.morning"></mat-checkbox></td>
+            <td><mat-checkbox disabled [(ngModel)]="drug.noon"></mat-checkbox></td>
+            <td><mat-checkbox disabled [(ngModel)]="drug.eve"></mat-checkbox></td>
+            <td><mat-checkbox disabled [(ngModel)]="drug.night"></mat-checkbox></td>
+            <td>{{drug.qty}}</td>
+            <td>{{drug.days}}</td>
 
+          </tr>
 
-
+          </tbody>
+        </table>
 
 
 
