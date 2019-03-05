@@ -51,7 +51,7 @@ export class DoctorVideochatDashboardComponent implements OnInit {
 
 
   ngOnInit() {
-  console.log(this.morning)
+
 
     this.arry = Array(this.count).fill(0).map((x,i)=>i);
     if (localStorage.getItem("fname") == null) {
@@ -87,22 +87,37 @@ export class DoctorVideochatDashboardComponent implements OnInit {
     // })
 
     //--------------------------------------------------------------------------
-    //Answer the request come from other end
+    // Answer the request come from other end
     var n = <any>navigator;
     n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
     this.peer.on('call',function (call) {
       n.getUserMedia({video:true,audio:true},function (stream) {
-        call.answer(stream)
-        call.on('stream',function (remotestream) {
-          video.src = URL.createObjectURL(remotestream);
-          video.play()
-        })
+
+       if(stream.active==true){
+
+         // if(confirm("Patient is Calling......")){
+           call.answer(stream)
+           call.on('stream',function (remotestream) {
+             video.src = URL.createObjectURL(remotestream);
+             video.play()
+           })
+         // }
+
+         // if (confirm("Patient Calling.........................")) {
+
+         // } else {
+         //      return;
+         // }
+
+       }
+
+
       },function (err) {
         console.log('Failed to get local stream' ,err);
       })
     })
     //-----------------------------------------------------------------------------
-    this.getPatientKey();
+
   }
 
   // connect() {
@@ -114,30 +129,31 @@ export class DoctorVideochatDashboardComponent implements OnInit {
 
   //--------------------------------------------------------------------------
   //Connect to the the other id and video call
-  videoConnect(key) {
-    let video = this.myVideo.nativeElement;
-    var localvar = this.peer;
-    var fname =key;
-    console.log(fname)
-    var n = <any>navigator;
-    n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
-
-    n.getUserMedia({video:true,audio:true},function (stream) {
-      var call = localvar.call(fname,stream);
-      call.on('stream',function (remotestream) {
-        video.src = URL.createObjectURL(remotestream)
-        video.play();
-      })
-    },function (err) {
-      console.log('Failed to get local stream' ,err);
-    })
+  // videoConnect(key) {
+  //   let video = this.myVideo.nativeElement;
+  //   var localvar = this.peer;
+  //   var fname =key;
+  //   console.log(fname)
+  //   var n = <any>navigator;
+  //   n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
+  //
+  //   n.getUserMedia({video:true,audio:true},function (stream) {
+  //     var call = localvar.call(fname,stream);
+  //     call.on('stream',function (remotestream) {
+  //       video.src = URL.createObjectURL(remotestream)
+  //       video.play();
+  //     })
+  //   },function (err) {
+  //     console.log('Failed to get local stream' ,err);
+  //   })
   //-------------------------------------------------------------------------------
-  }
+  // }
 
 
   getPatientKey(){
     this.doctorChatService.getPatientKey(this.PID).subscribe(result=>{
-      this.videoConnect(result)
+     this.patientKey = result;
+     console.log(result)
     })
   }
   updateKey(DID,key){
@@ -207,11 +223,23 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   }
 e
   finishAppointment(){
+
+    var thisCom  = this;
+    this.doctorChatService.getPatientKey(this.PID).subscribe(result=>{
+      this.patientKey = result;
       console.log(this.patientKey)
-    var conn = this.peer.connect(this.patientKey);
-    conn.on('open', function () {
-      conn.send("hello")
+      var conn = this.peer.connect(result);
+      conn.on('open', function () {
+        conn.send(true)
+        thisCom.doctorChatService.finishAppointment(thisCom.appCode).subscribe(done=>{
+          console.log(done)
+          console.log(thisCom.peer)
+          thisCom.peer.disconnect();
+        })
+      })
     })
+
+
     // this.route.navigate(["Doctor-Appointment"])
 
     // this.route.navigateByUrl('/Doctor-VideoChat-DashBoard', {skipLocationChange: true}).then(()=>
