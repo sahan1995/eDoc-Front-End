@@ -78,13 +78,28 @@ export class DoctorVideochatDashboardComponent implements OnInit {
     }, 1000)
     //----------------------------------------------------------------------------
 
+   var thisC = this;
+    this.peer.on('connection', function (conn) {
+      conn.on('data', function (data) {
+        console.log(data)
+        if(data){
+          thisC.snackBar.open("Payment Completed !","OK",{
+            duration :5000,
+          })
+          var n = <any>navigator;
+          n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
+          n.getUserMedia({video:true,audio:true},function (stream) {
+            let video = thisC.myVideo.nativeElement;
+            video.pause()
+            video.src="";
+          },function (err) {
 
-    // this.peer.on('connection', function (conn) {
-    //   conn.on('data', function (data) {
-    //
-    //     console.log(data);
-    //   })
-    // })
+            console.log(err)
+          })
+
+        }
+      })
+    })
 
     //--------------------------------------------------------------------------
     // Answer the request come from other end
@@ -230,12 +245,20 @@ e
       console.log(this.patientKey)
       var conn = this.peer.connect(result);
       conn.on('open', function () {
-        conn.send(true)
-        thisCom.doctorChatService.finishAppointment(thisCom.appCode).subscribe(done=>{
-          console.log(done)
-          console.log(thisCom.peer)
-          thisCom.peer.disconnect();
+        thisCom.doctorChatService.getDoctorDetails(thisCom.DID).subscribe(docresult=>{
+        var price = parseFloat(docresult.webFee/179.57).toFixed(2)
+
+          conn.send({
+            close : true,
+            amount : price
+          })
+          thisCom.doctorChatService.finishAppointment(thisCom.appCode).subscribe(done=>{
+            console.log(done)
+            console.log(thisCom.peer)
+            // thisCom.peer.disconnect();
+          })
         })
+
       })
     })
 

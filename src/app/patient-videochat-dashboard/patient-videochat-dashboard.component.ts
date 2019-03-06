@@ -7,6 +7,7 @@ import {Promise} from "q";
 
 declare var Peer: any;
 declare let paypal:any;
+declare var thisComp = this;
 @Component({
   selector: 'app-patient-videochat-dashboard',
   templateUrl: './patient-videochat-dashboard.component.html',
@@ -29,7 +30,7 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
   private callConnected = false;
   private drugs: any;
   private showPres = false;
-  private bootbox = this;
+  private isFinish = false;
 
   private addScpipt : boolean = false;
   private finalAmount : number = 1;
@@ -52,8 +53,24 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
       });
     },
     onAuthorize : (data,actions)=>{
+      var thisC = this;
       return actions.payment.execute().then((payment)=>{
-        console.log("Success ")
+       this.patientVideoChatSer.getDoctorKey(this.DID).subscribe(result=>{
+         var conn = this.peer.connect(result);
+         conn.on('open',function () {
+           conn.send(true)
+           var n = <any>navigator;
+           n.getUserMedia = n.getUserMedia||n.webkitGetUserMedia||n.mozGetUserMedia
+           n.getUserMedia({video:true,audio:true},function (stream) {
+             let video = thisC.myVideo.nativeElement;
+             video.pause()
+             video.src="";
+           },function (err) {
+
+             console.log(err)
+           })
+         })
+       })
       })
     }
   };
@@ -92,7 +109,12 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
       conn.on('data', function (data) {
         if (data) {
           // thisCom.endCallAndShowPrescription();
-          console.log()
+          console.log(data)
+          thisCom.isFinish = true;
+          thisCom.finalAmount = data.amount;
+          let button :HTMLElement = document.getElementById('paypal-checkout-btn') as HTMLElement;
+          button.click();
+          console.log(button)
 
           thisCom.patientVideoChatSer.getPrescription(thisCom.appCode).subscribe(result => {
             console.log(result.drugs);
@@ -100,6 +122,7 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
             thisCom.drugs = result.drugs;
 
           })
+
         }
       })
     })
@@ -210,10 +233,15 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
   ngAfterViewChecked():void{
     if(!this.addScpipt){
       this.addPaypalScript().then(()=>{
-
         paypal.Button.render(this.paypalConfig,'paypal-checkout-btn')
+       console.log("Here")
       })
     }
+  }
+
+  btnClick(){
+    console.log(this.addScpipt)
+
   }
 
 }

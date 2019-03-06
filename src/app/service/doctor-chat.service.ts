@@ -58,4 +58,11 @@ export class DoctorChatService {
   finishAppointment(appCode){
     return this.http.post(this.url+"appointments/finishAppointment?appCode="+appCode);
   }
+
+
+
+  getDoctorDetails(DID){
+    return this.http.get(this.url+"doctors/"+DID);
+  }
+
 }
