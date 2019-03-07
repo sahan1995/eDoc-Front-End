@@ -33,8 +33,8 @@ export class ChatServiceService {
     const email = "test@example.com"
     this.chatMessages = this.getMessages();
     this.chatMessages.push({
-      message:msg,
-      timeSent:timestap,
+      // message:msg,
+      // timeSent:timestap,
       // userName:this.userName,
       userName:"test-user",
       email:email
