@@ -31,4 +31,14 @@ export class PatientAppointmentsService {
     return this.http.get(this.url + "patients/getAppointmentByType?PID=" + PID + "&appType=" + appType)
   }
 
+
+  getFinishedAppointments(PID){
+    return this.http.get(this.url+"patients/finishedAppointmet?PID="+PID);
+  }
+
+  isFamDoc(PID,DID){
+    return this.http.get(this.url+"patientFamDoc/isFamDoc?PID="+PID+"&DID="+DID);
+  }
+
+
 }

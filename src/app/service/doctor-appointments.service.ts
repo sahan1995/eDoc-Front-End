@@ -39,4 +39,12 @@ export class DoctorAppointmentsService {
 
     return this.http.get(this.url+"appointments/findByDateAndType?date="+date+"&DID="+DID+"&appType="+appType);
   }
+
+  getFinishedApointments(DID){
+    return this.http.get(this.url+"doctors/finishedAppointments?DID="+DID);
+  }
+
+  isFamPatient(PID,DID){
+    return this.http.get(this.url+"patientFamDoc/isFamDoc?PID="+PID+"&DID="+DID);
+  }
 }

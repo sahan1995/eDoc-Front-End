@@ -26,6 +26,11 @@ export class PatientAppointmentsComponent implements OnInit {
   private mapFlag = false;
   public origin: any;
   public destination: any;
+
+  public isFinishedAppointments = false;
+  public isCurrentAppointments = true;
+
+  public finishedAppointments :any;
   constructor(private route:Router,private patientAppService:PatientAppointmentsService) { }
 
   ngOnInit() {
@@ -37,6 +42,8 @@ export class PatientAppointmentsComponent implements OnInit {
     this.PID = localStorage.getItem("id");
 
     this.getPatientAppointments();
+
+    this.finishedAppointments();
   }
 
 
@@ -74,7 +81,7 @@ export class PatientAppointmentsComponent implements OnInit {
     this.appointments.forEach(appoint => {
       // this.appointDetails["appCode"] = appoint.patientDTO.fname;
       // console.log(appoint.patientDTO.fname)
-      this.appointDetails = appoint;
+      // this.appointDetails = appoint;
       appoint["DID"] = appoint.doctorDTO.did
       appoint["doctorName"] = appoint.doctorDTO.fname + " " + appoint.doctorDTO.lname;
       appoint["lat"] = appoint.doctorDTO.lat;
@@ -107,5 +114,48 @@ export class PatientAppointmentsComponent implements OnInit {
     return time.join(''); // return adjusted time or original string
   }
 
+
+
+  getFinishedAppointmets(){
+    this.isFinishedAppointments = true;
+    this.isCurrentAppointments = false;
+
+  }
+
+  getCurrentAPoointments(){
+    this.isFinishedAppointments = false;
+    this.isCurrentAppointments = true;
+  }
+
+
+
+  finishedAppointments(){
+    this.patientAppService.getFinishedAppointments(this.PID).subscribe(result=>{
+      this.finishedAppointments = result;
+      this.finishedAppointments.forEach(finishApp=>{
+
+        finishApp["DID"] = finishApp.doctorDTO.did
+        finishApp["doctorName"] = finishApp.doctorDTO.fname + " " + finishApp.doctorDTO.lname;
+        finishApp["drugs"] = finishApp.prescriptionDTO.drugs;
+        this.patientAppService.isFamDoc(this.PID,finishApp.doctorDTO.did).subscribe(result=>{
+          finishApp["isFamDoc"] = result;
+        })
+        this.patientAppService.getProPic(finishApp.doctorDTO.profilePic).subscribe(result => {
+
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            finishApp["doctorPic"] = reader.result;
+          }, false)
+          if (result) {
+            const img = result as Blob
+            reader.readAsDataURL(img)
+          }
+        })
+
+
+      })
+
+    })
+  }
 
 }

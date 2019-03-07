@@ -36,6 +36,9 @@ import { AgmDirectionModule } from 'agm-direction';
 import { DoctorVideochatDashboardComponent } from './doctor-videochat-dashboard/doctor-videochat-dashboard.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatChipsModule} from '@angular/material/chips';
+import {AngularFireModule} from "@angular/fire";
+import {AngularFireDatabaseModule} from "@angular/fire/database";
+import {AngularFireAuthModule} from "@angular/fire/auth";
 
 // import { PatientComponent } from './patient/patient.component';
 import { PatientVideochatDashboardComponent } from './patient-videochat-dashboard/patient-videochat-dashboard.component'
@@ -47,6 +50,8 @@ import {MatBottomSheetModule} from '@angular/material/bottom-sheet';
 import {MatSelectModule} from '@angular/material/select';
 import { DoctorRequestsComponent } from './doctor-requests/doctor-requests.component';
 import { RegisterPrivatePracticeComponent } from './register-private-practice/register-private-practice.component';
+import {environment} from "../environments/environment";
+import { FamilyDoctorsComponent } from './family-doctors/family-doctors.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +69,8 @@ import { RegisterPrivatePracticeComponent } from './register-private-practice/re
     PatientAppointmentsComponent,
     FindDoctorComponent,
     DoctorRequestsComponent,
-    RegisterPrivatePracticeComponent
+    RegisterPrivatePracticeComponent,
+    FamilyDoctorsComponent
 
 
   ],
@@ -99,7 +105,10 @@ import { RegisterPrivatePracticeComponent } from './register-private-practice/re
     MatChipsModule,
     MatIconModule,
     MatBottomSheetModule,
-    MatSelectModule
+    MatSelectModule,
+    AngularFireAuthModule,
+    AngularFireDatabaseModule,
+    AngularFireModule.initializeApp(environment.firebase)
 
 
   ],

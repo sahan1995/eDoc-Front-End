@@ -35,7 +35,10 @@ export class DoctorAppointmentsComponent implements OnInit {
   private mapFlag = false;
   public origin: any;
   public destination: any;
+  public isFinishedAppointments = false;
+  public isCurrentAppointments = true;
 
+  public finishedAppointments :any;
   ngOnInit() {
 
 
@@ -49,6 +52,7 @@ export class DoctorAppointmentsComponent implements OnInit {
     this.appoint = Observable.interval(1000).startWith(0).switchMap(()=>this.doctorAppSer.getDoctorAppointments(this.DID))
 
     this.getDoctorAppointments(this.DID);
+    this.finsiedAppointmentsList();
 
   }
 
@@ -169,4 +173,50 @@ export class DoctorAppointmentsComponent implements OnInit {
       })
     })
   }
+
+
+
+  getFinishedAppointmets(){
+    this.isFinishedAppointments = true;
+    this.isCurrentAppointments = false;
+
+  }
+
+  getCurrentAPoointments(){
+    this.isFinishedAppointments = false;
+    this.isCurrentAppointments = true;
+  }
+
+
+  finsiedAppointmentsList(){
+    this.doctorAppSer.getFinishedApointments(this.DID).subscribe(result=>{
+      this.finishedAppointments = result;
+      console.log(this.finishedAppointments)
+
+
+      this.finishedAppointments.forEach(finishApp=>{
+
+        finishApp["PID"] = finishApp.patientDTO.pid
+        finishApp["patientName"] = finishApp.patientDTO.fname + " " + finishApp.patientDTO.lname;
+        finishApp["drugs"] = finishApp.prescriptionDTO.drugs;
+        this.doctorAppSer.isFamPatient(finishApp.patientDTO.pid,this.DID).subscribe(result=>{
+          finishApp["isFamDoc"] = result;
+        })
+        this.doctorAppSer.getProPic(finishApp.patientDTO.profilePic).subscribe(result => {
+
+          let reader = new FileReader();
+          reader.addEventListener("load", () => {
+            finishApp["PatientPic"] = reader.result;
+          }, false)
+          if (result) {
+            const img = result as Blob
+            reader.readAsDataURL(img)
+          }
+        })
+
+
+      })
+    })
+  }
+
 }
