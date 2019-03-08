@@ -436,95 +436,13 @@
   <div class="content-wrapper row w3-container w3-center w3-animate-opacity">
     <!-- Content Header (Page header) -->
     <section class="content-header">
-      <h1>
-        Register Your Private Practice Here
 
-      </h1>
 
     </section>
 
     <!-- Main content -->
     <!-- Main content -->
     <section class="content">
-      <!-- Small boxes (Stat box) -->
-      <div class="row w3-container  mainDiv" >
-        <br><br>
-        <form #ppForm="ngForm">
-        <div class="col-lg-3 col-sm-1">
-          <label>Name Of PP</label>
-          <input type="text" class="form-control textF" placeholder="Name" [ngModel] name="name">
-        </div>
-        <div class="col-lg-3 col-sm-1">
-          <label>Open Time </label>
-          <input type="time" class="form-control textF" atp-time-picker value="12:00" [ngModel] name="openTime">
-        </div>
-
-          <div class="col-lg-3 col-sm-1">
-            <label>Close Time</label>
-            <input type="time" class="form-control textF" atp-time-picker value="12:00" [ngModel] name="closeTime">
-          </div>
-          <div class="col-lg-3 col-sm-1">
-            <label>Telephone Number </label>
-            <input type="text" class="form-control textF" placeholder="Telephone Number" [ngModel] name="tel">
-          </div>
-          <div class="col-lg-3 col-sm-1">
-            <label>Country</label>
-            <input type="text" class="form-control textF" placeholder="Country" [ngModel] name="country">
-          </div>
-          <div class="col-lg-3 col-sm-1">
-            <label>City</label>
-            <input type="text" class="form-control textF" placeholder="City" [ngModel] name="city">
-          </div>
-          <div class="col-lg-3 col-sm-1">
-            <label>Lane</label>
-            <input type="text" class="form-control textF" placeholder="Lane" [ngModel] name="lane">
-          </div>
-          <div class="col-lg-3 col-sm-1">
-            <label>Code</label>
-            <input type="text" class="form-control textF" placeholder="Code" [ngModel] name="code">
-          </div>
-
-          <div class="col-lg-12">
-            <div class="col-lg-12"><br>
-              <div class="gMap"><br>
-
-                &nbsp; &nbsp;<button mat-raised-button matTooltip="Some times location gone worng. When it happens plase click the on the your location on map" (click)="findMe()">Find My Location</button><br><br>
-
-                <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" (mapClick)="setMarker($event)">
-                  <agm-marker [longitude]="lng" [latitude]="lat">
-
-                  </agm-marker>
-                </agm-map>
-              </div>
-
-            </div>
-
-
-
-          </div>
-
-          <div class="col-lg-12">
-            <br><br>
-            <button mat-raised-button color="primary" (click)="registerPP(ppForm)">Register Private Practice </button>
-            <br><br>
-            <br><br>
-            <br><br>
-          </div>
-
-
-
-          <br><br>
-          <br><br>
-        </form>
-
-
-
-      </div>
-
-
-
-
-
 
 
     </section>

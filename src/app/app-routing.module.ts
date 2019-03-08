@@ -18,6 +18,7 @@ import {FindDoctorComponent} from "./find-doctor/find-doctor.component";
 import {DoctorRequestsComponent} from "./doctor-requests/doctor-requests.component";
 import {RegisterPrivatePracticeComponent} from "./register-private-practice/register-private-practice.component";
 import {FamilyDoctorsComponent} from "./family-doctors/family-doctors.component";
+import {MyPrivatePracticeComponent} from "./my-private-practice/my-private-practice.component";
 
 const routes: Routes = [
   {path :'',redirectTo:'home',pathMatch:'full'},
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path :'Find-Doctor',component:FindDoctorComponent},
   {path :'Doctor-Requests',component:DoctorRequestsComponent},
   {path :'Register-Private-Practice',component:RegisterPrivatePracticeComponent},
+  {path :'My-Private-Practice',component:MyPrivatePracticeComponent},
   {path :'Family-Doctors',component:FamilyDoctorsComponent},
   {path:'',component:IndexwindowComponent}
 ];
@@ -48,4 +50,4 @@ export class AppRoutingModule { }
 export const routingComponents=[RegisterComponent,IndexwindowComponent,PatientSignUpComponent,SignInComponent,PatientHomeComponent,
 DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent,DoctorVideochatDashboardComponent,
 PatientVideochatDashboardComponent,PatientAppointmentsComponent,FindDoctorComponent,DoctorRequestsComponent,RegisterPrivatePracticeComponent,
-FamilyDoctorsComponent]
+FamilyDoctorsComponent,MyPrivatePracticeComponent]

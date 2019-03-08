@@ -52,6 +52,7 @@ import { DoctorRequestsComponent } from './doctor-requests/doctor-requests.compo
 import { RegisterPrivatePracticeComponent } from './register-private-practice/register-private-practice.component';
 import {environment} from "../environments/environment";
 import { FamilyDoctorsComponent } from './family-doctors/family-doctors.component';
+import { MyPrivatePracticeComponent } from './my-private-practice/my-private-practice.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -70,7 +71,8 @@ import { FamilyDoctorsComponent } from './family-doctors/family-doctors.componen
     FindDoctorComponent,
     DoctorRequestsComponent,
     RegisterPrivatePracticeComponent,
-    FamilyDoctorsComponent
+    FamilyDoctorsComponent,
+    MyPrivatePracticeComponent
 
 
   ],

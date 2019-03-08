@@ -13,7 +13,7 @@ import {ChatMessage} from "../models/chat-message.model";
 export class ChatServiceService {
 
   user :any;
-  chatMessages:AngularFireList<ChatMessage[]>
+  chatMessages:FirebaseListObservable<ChatMessage[]>
   chatMessage:ChatMessage
   userName : Observable<string>
   constructor(
@@ -30,23 +30,23 @@ export class ChatServiceService {
   sendMessage(msg:string){
     const timestap = this.getTimeStamp();
     // const email = this.user.email;
-    const email = "test@example.com"
+    // const email = "test@example.com"
     this.chatMessages = this.getMessages();
     this.chatMessages.push({
-      // message:msg,
-      // timeSent:timestap,
-      // userName:this.userName,
+      message:msg,
+      timeSent:timestap,
+      userName:this.userName,
       userName:"test-user",
-      email:email
+      // email:email
     })
 
     console.log("Called Send Message")
   }
 
-  getMessages():AngularFireList<ChatMessage[]>{
+  getMessages():FirebaseListObservable<ChatMessage[]>{
 
 
-    return this.db.list("/messages",ref => {return ref.limitToLast(25).ref.orderByKey()})
+    return this.db.list("/messagesl",ref => {return ref.limitToLast(25).ref.orderByKey()})
 
 
   }
