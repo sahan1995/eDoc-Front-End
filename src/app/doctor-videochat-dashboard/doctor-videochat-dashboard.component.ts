@@ -186,13 +186,13 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   submitPrescription(drugForm){
 
     let drug = drugForm.value;
-    var nums;
+    // var nums;
 
       this.doctorChatService.getPrescriptionLastId().subscribe(result=>{
         if(this.prescAdded==false){
           this.lastID = result;
           var num =  parseInt(this.lastID)+1;
-          nums = 222;
+          // nums = 222;
           this.pressID = "Pres" + num;
           this.prescription={
             prescriptionID : this.pressID,
@@ -236,7 +236,7 @@ export class DoctorVideochatDashboardComponent implements OnInit {
       }
     })
   }
-e
+
   finishAppointment(){
 
     var thisCom  = this;
