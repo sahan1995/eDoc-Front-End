@@ -1,0 +1,4 @@
+.message-wrapper{
+  overflow-y: scroll;
+  height: 600px;
+}

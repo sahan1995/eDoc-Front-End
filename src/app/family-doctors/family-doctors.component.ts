@@ -10,27 +10,19 @@ import {ChatMessage} from "../models/chat-message.model";
 })
 export class FamilyDoctorsComponent implements OnInit, OnChanges {
 
-  private message: string;
 
-  private feed: any;
+
+
 
   constructor(private chat: ChatServiceService) {
   }
 
   ngOnInit() {
-    // this.feed = this.chat.getMessages();
 
-    this.feed = this.chat.getMessages();
-    console.log(this.feed)
+
+
   }
 
-  send() {
-    this.chat.sendMessage(this.message)
-  }
-
-  ngOnChanges() {
-    // this.feed = this.chat.getMessages();
-  }
 
 
 

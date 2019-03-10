@@ -5,12 +5,12 @@
 export const environment = {
   production: false,
   firebase:{
-    apiKey: "AIzaSyCmlNORI4rftdyzuTU6HJpiCEUiH7AhGh0",
-    authDomain: "edoc-chat.firebaseapp.com",
-    databaseURL: "https://edoc-chat.firebaseio.com",
-    projectId: "edoc-chat",
-    storageBucket: "edoc-chat.appspot.com",
-    messagingSenderId: "709459100572"
+    apiKey: 'AIzaSyD0zEnMK1AU5RsNWmAk_nZ6ZPIbU0Wd3Nc',
+    authDomain: 'chatedoc.firebaseapp.com',
+    databaseURL: 'https://chatedoc.firebaseio.com',
+    projectId: 'chatedoc',
+    storageBucket: 'chatedoc.appspot.com',
+    messagingSenderId: '52910338813'
   }
 };
 

@@ -1,0 +1,23 @@
+.chat-message{
+
+  padding: 1.5em;
+}
+
+img{
+  margin-right: 1em;
+  height:50px;
+  width: 50px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+.name{
+  text-decoration: underline;
+  font-weight: 600;
+}
+.timestamp{
+  margin-bottom: 1.5em;
+  color: lightgray;
+}
+.message{
+  font-size: 1.2em;
+}

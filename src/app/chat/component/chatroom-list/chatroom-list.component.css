@@ -1,0 +1,14 @@
+.chatroom-list{
+  border-right:2px solid lightgray;
+  /*overflow-y: scroll !important;*/
+  /*overflow-y: scroll;*/
+  /*position: relative;*/
+  overflow-y: scroll;
+  /*width: 1000px;*/
+  height: 800px;
+}
+
+.chat-room-list-item{
+    border-bottom: 1px solid lightgray;
+    padding: 1em;
+}

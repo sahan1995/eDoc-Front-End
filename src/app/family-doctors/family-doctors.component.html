@@ -1,17 +1,13 @@
-<input class="chatInput" [(ngModel)]="message"/>
+<div class="h-100 d-flex flex-column chat-window">
+
+  <div class="message-wrapper h-100">
+
+    <div *ngFor="let msg of dummyData">
+      {{msg.message}}
+    </div>
+
+  </div>
 
 
 
-<button class="chatButton" (click)="send()">Send </button>
-
-
-
-
-<div class="feed">
-
-  <!--<div *ngFor=" let  msg of feed " class="message">-->
-
-  <!--{{msg}}-->
-
-  <!--</div>-->
 </div>

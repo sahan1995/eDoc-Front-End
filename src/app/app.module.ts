@@ -53,6 +53,15 @@ import { RegisterPrivatePracticeComponent } from './register-private-practice/re
 import {environment} from "../environments/environment";
 import { FamilyDoctorsComponent } from './family-doctors/family-doctors.component';
 import { MyPrivatePracticeComponent } from './my-private-practice/my-private-practice.component';
+import { ChatComponent } from './chat/chat.component';
+import { ChatInputComponent } from './chat/component/chat-input/chat-input.component';
+import { ChatMessageComponent } from './chat/component/chat-message/chat-message.component';
+import { ChatroomListComponent } from './chat/component/chatroom-list/chatroom-list.component';
+import { ChatroomTitleBarComponent } from './chat/component/chatroom-title-bar/chatroom-title-bar.component';
+import { ChatroomWindowComponent } from './chat/component/chatroom-window/chatroom-window.component';
+import {AngularFireStorageModule} from "@angular/fire/storage";
+import {AngularFirestoreModule} from "@angular/fire/firestore";
+import {AuthService} from "./service/auth.service";
 @NgModule({
   declarations: [
     AppComponent,
@@ -72,7 +81,13 @@ import { MyPrivatePracticeComponent } from './my-private-practice/my-private-pra
     DoctorRequestsComponent,
     RegisterPrivatePracticeComponent,
     FamilyDoctorsComponent,
-    MyPrivatePracticeComponent
+    MyPrivatePracticeComponent,
+    ChatComponent,
+    ChatInputComponent,
+    ChatMessageComponent,
+    ChatroomListComponent,
+    ChatroomTitleBarComponent,
+    ChatroomWindowComponent
 
 
   ],
@@ -110,11 +125,13 @@ import { MyPrivatePracticeComponent } from './my-private-practice/my-private-pra
     MatSelectModule,
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    AngularFireModule.initializeApp(environment.firebase)
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireStorageModule,
+    AngularFirestoreModule
 
 
   ],
-  providers: [VideoChatService],
+  providers: [VideoChatService,AuthService],
   bootstrap: [AppComponent],
   entryComponents:[PatientSignUpComponent]
 })
