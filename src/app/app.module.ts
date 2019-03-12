@@ -62,6 +62,9 @@ import { ChatroomWindowComponent } from './chat/component/chatroom-window/chatro
 import {AngularFireStorageModule} from "@angular/fire/storage";
 import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AuthService} from "./service/auth.service";
+import {ChatroomService} from "./service/chatroom.service";
+import {FirestoreSettingsToken} from "@angular/fire/firestore";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -87,7 +90,7 @@ import {AuthService} from "./service/auth.service";
     ChatMessageComponent,
     ChatroomListComponent,
     ChatroomTitleBarComponent,
-    ChatroomWindowComponent
+    ChatroomWindowComponent,
 
 
   ],
@@ -131,7 +134,7 @@ import {AuthService} from "./service/auth.service";
 
 
   ],
-  providers: [VideoChatService,AuthService],
+  providers: [VideoChatService,AuthService,ChatroomService,{provide:FirestoreSettingsToken,useValue:{}}],
   bootstrap: [AppComponent],
   entryComponents:[PatientSignUpComponent]
 })

@@ -40,7 +40,12 @@ const routes: Routes = [
   {path :'Register-Private-Practice',component:RegisterPrivatePracticeComponent},
   {path :'My-Private-Practice',component:MyPrivatePracticeComponent},
   {path :'Family-Doctors',component:FamilyDoctorsComponent},
-  {path :'My-Chat',component:ChatComponent},
+  {path :'My-Chat',
+    children:[
+      {path:'',component:ChatComponent},
+      {path:':chatroomId',component:ChatComponent}
+    ]
+  },
   {path:'',component:IndexwindowComponent}
 ];
 

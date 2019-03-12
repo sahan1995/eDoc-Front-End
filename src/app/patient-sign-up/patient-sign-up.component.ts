@@ -4,6 +4,7 @@ import {PatientServiceService} from "../service/patient-service.service";
 import {MatDialog,MatDialogConfig} from "@angular/material";
 import {Router} from "@angular/router"
 import {AuthService} from "../service/auth.service";
+import {AngularFirestore} from "@angular/fire/firestore";
 @Component({
   selector: 'app-patient-sign-up',
   templateUrl: './patient-sign-up.component.html',
@@ -13,7 +14,7 @@ export class PatientSignUpComponent implements OnInit {
 
 
   constructor(private patientService:PatientServiceService,private dialog:MatDialog,
-              private route:Router,private auth:AuthService
+              private route:Router,private auth:AuthService,private db :AngularFirestore
               ) {
   }
 
@@ -60,42 +61,64 @@ export class PatientSignUpComponent implements OnInit {
   }
 
   Register(userForm){
-    this.fireBaseSignUP("sahan","rajakaruna","test@exam.com","abcd0000")
-    // var lastID;
-    // this.getProfilePic();
-    // let serializedForm = (userForm.value);
-    // this.patientService.getLastID().subscribe(result=>{
-    //
-    //   if(result==""){
-    //     this.patientID="pat1";
-    //     serializedForm["ID"]=this.patientID;
-    //
-    //   }else{
-    //     lastID = result;
-    //     var num = parseInt(lastID)+1;
-    //     this.patientID="pat"+num;
-    //     serializedForm["ID"]=this.patientID;
-    //   }
-    //
-    //   let file = this.proPic.nativeElement.files[0];
-    //
-    //   // serializedForm["PID"]=this.patientID;
-    //   serializedForm["lat"]=this.lat;
-    //   serializedForm["lng"]=this.lng;
-    //   serializedForm["profilePic"] = file.name;
-    //   serializedForm["role"] = "patient";
-    //
-    //   console.log(serializedForm)
+
+    var lastID;
+    this.getProfilePic();
+    let serializedForm = (userForm.value);
+    this.patientService.getLastID().subscribe(result=>{
+
+      if(result==""){
+        this.patientID="pat1";
+        serializedForm["ID"]=this.patientID;
+
+      }else{
+        lastID = result;
+        var num = parseInt(lastID)+1;
+        this.patientID="pat"+num;
+        serializedForm["ID"]=this.patientID;
+      }
+
+      let file = this.proPic.nativeElement.files[0];
+
+      // serializedForm["PID"]=this.patientID;
+      serializedForm["lat"]=this.lat;
+      serializedForm["lng"]=this.lng;
+      serializedForm["profilePic"] = file.name;
+      serializedForm["role"] = "patient";
+
+      console.log(serializedForm)
 
 
-      // this.patientService.registerPatient(this.patientID,serializedForm).subscribe(data=>{
-      //     alert("Successfully Register !")
-      //     this.route.navigate(['/SignIn'])
-      //
-      // });
-      // console.log(patient)
+      this.patientService.registerPatient(this.patientID,serializedForm).subscribe(data=>{
+        var fname = serializedForm["fname"]
+        var lname = serializedForm["lname"]
+        var email = serializedForm["email"]
+        var password = serializedForm["password"]
+        this.fireBaseSignUP(fname,lname,email,password)
+
+      });
+
+    })
+
+
+    // this.db.collection("cities").doc("test").set({
+    //   name: "Los test",
+    //   state: "CA test",
+    //   country: "USA test"
     // })
-     // this.json=JSON.stringify(u)
+
+
+
+    // this.db.collection(`miyuruchatroom/miyuru&leel/messages`).add({
+    //   message:'hello Leel',
+    //   sender:{
+    //     email:'miyuru@gmail.com',
+    //     fname:'miyuru'
+    //   }
+    // })
+
+    // console.log(patient)
+    // this.json=JSON.stringify(u)
   }
 
 
@@ -120,10 +143,15 @@ export class PatientSignUpComponent implements OnInit {
   }
 
   fireBaseSignUP(fname,lname,email,password){
-    this.auth.signUp(fname, lname, email, uname, password).subscribe(result=>{
-      console.log(result)
+    this.auth.signUp(fname, lname, email, password).subscribe(result=>{
+      if(result){
+
+        alert("Successfully Register !")
+        this.route.navigate(['/SignIn'])
+      }
     })
   }
+
 
 
 

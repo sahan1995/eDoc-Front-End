@@ -15,7 +15,7 @@ import 'rxjs/add/observable/fromPromise';
 export class AuthService {
 
   public currentUser:Observable<User|null>
-
+  public currentUserSnapShot:User|null
 
 
   constructor(private router:Router,
@@ -31,6 +31,8 @@ export class AuthService {
          return Observable.of(null)
        }
       })
+
+    this.setCurrentUserSnapshot();
   }
 
   public signUp(firstName,lastName,email,password):Observable<boolean>{
@@ -68,6 +70,7 @@ export class AuthService {
       this.afAuth.auth.signInWithEmailAndPassword(email,password)
         .then((user)=>{
 
+          this.setCurrentUserSnapshot();
           console.log(user)
          return true;
         })
@@ -76,6 +79,13 @@ export class AuthService {
           return false;
         }))
     )
+  }
+
+  private setCurrentUserSnapshot():void{
+    this.currentUser.subscribe(user=>{
+      console.log(user)
+      this.currentUserSnapShot=user
+    })
   }
 
 }

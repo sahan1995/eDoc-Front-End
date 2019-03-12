@@ -14,7 +14,7 @@ export class FamilyDoctorsComponent implements OnInit, OnChanges {
 
 
 
-  constructor(private chat: ChatServiceService) {
+  constructor() {
   }
 
   ngOnInit() {
