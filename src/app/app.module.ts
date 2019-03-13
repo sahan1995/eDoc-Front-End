@@ -64,6 +64,11 @@ import {AngularFirestoreModule} from "@angular/fire/firestore";
 import {AuthService} from "./service/auth.service";
 import {ChatroomService} from "./service/chatroom.service";
 import {FirestoreSettingsToken} from "@angular/fire/firestore";
+import { DoctorChatInputComponent } from './doctor-chat/components/doctor-chat-input/doctor-chat-input.component';
+import { DoctorChatMessageComponent } from './doctor-chat/components/doctor-chat-message/doctor-chat-message.component';
+import { DoctorChatListComponent } from './doctor-chat/components/doctor-chat-list/doctor-chat-list.component';
+import { DoctorChatroomTitleBarComponent } from './doctor-chat/components/doctor-chatroom-title-bar/doctor-chatroom-title-bar.component';
+import { DoctorChatroomWindowComponent } from './doctor-chat/components/doctor-chatroom-window/doctor-chatroom-window.component';
 
 @NgModule({
   declarations: [
@@ -91,6 +96,11 @@ import {FirestoreSettingsToken} from "@angular/fire/firestore";
     ChatroomListComponent,
     ChatroomTitleBarComponent,
     ChatroomWindowComponent,
+    DoctorChatInputComponent,
+    DoctorChatMessageComponent,
+    DoctorChatListComponent,
+    DoctorChatroomTitleBarComponent,
+    DoctorChatroomWindowComponent,
 
 
   ],

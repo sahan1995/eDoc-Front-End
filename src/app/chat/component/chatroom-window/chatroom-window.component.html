@@ -1,6 +1,6 @@
 <div class="h-100 d-flex flex-column chat-window">
 
-  <app-chatroom-title-bar [title]="'Chat Facts'"></app-chatroom-title-bar>
+  <app-chatroom-title-bar [title]="'Chat With Doctor'"></app-chatroom-title-bar>
 <ng-container *ngIf="!chatroom else chatmessages" ></ng-container>
 <br><br>
   <div class="select-room h-100 w-100 d-flex justify-content-center align-items-center ">
@@ -19,8 +19,8 @@
 
 </div>
 
-<ng-template #chatmessages>
-  <div class="message-wrapper h-100">
+<ng-template #chatmessages >
+  <div class="message-wrapper h-100" style="background-color: white">
 
     <ng-container *ngFor="let msg of messages">
 

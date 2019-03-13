@@ -35,6 +35,9 @@ export class AuthService {
     this.setCurrentUserSnapshot();
   }
 
+
+
+
   public signUp(firstName,lastName,email,password):Observable<boolean>{
 
 
@@ -62,7 +65,33 @@ export class AuthService {
         })
     )
   }
+  public signUpPatient(firstName,lastName,email,password):Observable<boolean>{
 
+
+    return Observable.fromPromise(
+      this.afAuth.auth.createUserWithEmailAndPassword(email,password)
+        .then((user)=>{
+          console.log(user)
+          console.log(user.user.uid)
+          const  userRef : AngularFirestoreDocument<User> = this.db.doc(`users/${user.user.uid}`);
+          const updatedUser={
+            id:user.user.uid,
+            email:user.user.email,
+            firstName,
+            lastName,
+            photoUrl:'https://firebasestorage.googleapis.com/v0/b/chatedoc.appspot.com/o/download.png?alt=media&token=d68d23ae-10e3-482f-a773-7dc8e1c649ea'
+          }
+          // console.log(updatedUser)
+          userRef.set(updatedUser)
+          // console.log("true")
+          return true;
+        })
+        .catch((err)=>{
+          return false;
+          console.log(err)
+        })
+    )
+  }
 
   public logins(email,password):Observable<boolean>{
 

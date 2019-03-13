@@ -143,7 +143,7 @@ export class PatientSignUpComponent implements OnInit {
   }
 
   fireBaseSignUP(fname,lname,email,password){
-    this.auth.signUp(fname, lname, email, password).subscribe(result=>{
+    this.auth.signUpPatient(fname, lname, email, password).subscribe(result=>{
       if(result){
 
         alert("Successfully Register !")

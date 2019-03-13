@@ -27,8 +27,21 @@ export class ChatroomWindowComponent implements OnInit {
       this.chatroom=chatroom;
     })
     this.chatroomService.selectedChatroomMessages.subscribe(messages=>{
-      console.log(messages)
-      this.messages = messages;
+   if(messages!=null){
+     messages.forEach(msg=>{
+       if(msg.sender.firstName==localStorage.getItem('fname')){
+         msg["float"]="right"
+         msg['bgColor']='lightgreen';
+       }else{
+         msg["float"]="left"
+         msg['bgColor']='white';
+       }
+
+     })
+     this.messages = messages;
+     console.log(this.messages)
+   }
+
     })
   }
 

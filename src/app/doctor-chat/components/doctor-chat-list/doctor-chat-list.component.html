@@ -1,0 +1,13 @@
+<div class="h-100 d-flex flex-column chatroom-list">
+
+  <ng-container *ngFor="let chatroom of doctorchatRoomSerivce.chatrooms|async" >
+
+    <div class="chat-room-list-item">
+      <a [routerLink]="['/My-patients',chatroom.id]">{{chatroom.name}}</a>
+
+
+    </div>
+  </ng-container>
+
+
+</div>

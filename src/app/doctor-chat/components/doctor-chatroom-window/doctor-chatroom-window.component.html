@@ -1,0 +1,20 @@
+<div class="h-100 d-flex flex-column chat-window">
+
+  <app-doctor-chatroom-title-bar [title]="'Chat Facts'"></app-doctor-chatroom-title-bar>
+  <ng-container *ngIf="!docchatroom else chatmessages" ></ng-container>
+
+  <app-doctor-chat-input></app-doctor-chat-input>
+
+
+</div>
+
+<ng-template #chatmessages>
+  <div class="message-wrapper h-100" style="background-color: white">
+
+    <ng-container *ngFor="let msg of docmessages">
+
+      <app-doctor-chat-message [message]="msg"></app-doctor-chat-message>
+    </ng-container>
+
+  </div>
+</ng-template>
