@@ -69,6 +69,7 @@ import { DoctorChatMessageComponent } from './doctor-chat/components/doctor-chat
 import { DoctorChatListComponent } from './doctor-chat/components/doctor-chat-list/doctor-chat-list.component';
 import { DoctorChatroomTitleBarComponent } from './doctor-chat/components/doctor-chatroom-title-bar/doctor-chatroom-title-bar.component';
 import { DoctorChatroomWindowComponent } from './doctor-chat/components/doctor-chatroom-window/doctor-chatroom-window.component';
+import { PatientFamilyDoctorsComponent } from './patient-family-doctors/patient-family-doctors.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +102,7 @@ import { DoctorChatroomWindowComponent } from './doctor-chat/components/doctor-c
     DoctorChatListComponent,
     DoctorChatroomTitleBarComponent,
     DoctorChatroomWindowComponent,
+    PatientFamilyDoctorsComponent,
 
 
   ],
