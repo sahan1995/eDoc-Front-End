@@ -1,0 +1,74 @@
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  margin: auto;
+  text-align: center;
+}
+
+.title {
+  color: grey;
+  font-size: 18px;
+}
+
+.bookNow {
+  border: none;
+  outline: 0;
+  display: inline-block;
+  padding: 8px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+
+
+.bookNow:hover, a:hover {
+  opacity: 0.7;
+}
+.doctorCard{
+
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 2px;
+}
+.insideTop{
+  border-bottom: black solid 1px;
+}
+.imgDiv{
+  float: left;
+
+}
+.img{
+  border-radius: 50%;
+  width: 80px;
+  height: 80px;
+}
+.card a{
+  text-decoration: none;
+  font-size: 22px;
+  color: black;
+}
+.profileImg{
+  height: 100%;
+  width: 100%;
+
+}
+.mainDiv{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  background-color: white;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 2px;
+}
+.proImg{
+  width: 250px;
+  height: 250px;
+}
+.divCard{
+  margin-bottom: 15px;
+}
+.divMain{
+  margin-top: 20px;
+}

@@ -22,6 +22,7 @@ import {MyPrivatePracticeComponent} from "./my-private-practice/my-private-pract
 import {ChatComponent} from "./chat/chat.component";
 import {DoctorChatComponent} from "./doctor-chat/doctor-chat.component";
 import {PatientFamilyDoctorsComponent} from "./patient-family-doctors/patient-family-doctors.component";
+import {DoctorsFamilyPatientsComponent} from "./doctors-family-patients/doctors-family-patients.component";
 
 const routes: Routes = [
   {path :'',redirectTo:'home',pathMatch:'full'},
@@ -43,13 +44,14 @@ const routes: Routes = [
   {path :'My-Private-Practice',component:MyPrivatePracticeComponent},
   {path :'Family-Doctors',component:FamilyDoctorsComponent},
   {path :'My-Family-Doctors',component:PatientFamilyDoctorsComponent},
+  {path :'My-Family-Patients',component:DoctorsFamilyPatientsComponent},
   {path :'My-Chat',
     children:[
       {path:'',component:ChatComponent},
       {path:':chatroomId',component:ChatComponent}
     ]
   },
-  {path :'My-patients',
+  {path :'My-patients-chat',
     children:[
       {path:'',component:DoctorChatComponent},
       {path:':chatroomId',component:DoctorChatComponent}
@@ -65,4 +67,4 @@ export class AppRoutingModule { }
 export const routingComponents=[RegisterComponent,IndexwindowComponent,PatientSignUpComponent,SignInComponent,PatientHomeComponent,
 DoctorSignupComponent,DoctorHomeComponent,ConsultDoctorComponent,DoctorDetailComponent,DoctorAppointmentsComponent,DoctorVideochatDashboardComponent,
 PatientVideochatDashboardComponent,PatientAppointmentsComponent,FindDoctorComponent,DoctorRequestsComponent,RegisterPrivatePracticeComponent,
-FamilyDoctorsComponent,MyPrivatePracticeComponent,ChatComponent,DoctorChatComponent,PatientFamilyDoctorsComponent]
+FamilyDoctorsComponent,MyPrivatePracticeComponent,ChatComponent,DoctorChatComponent,PatientFamilyDoctorsComponent,DoctorsFamilyPatientsComponent]

@@ -19,3 +19,9 @@
   margin-top: 5px;
   border: black dashed 1px;
 }
+.img{
+  height: 200px;
+  width: 200px;
+  border-radius: 12px;
+  border: 1px solid gray;
+}

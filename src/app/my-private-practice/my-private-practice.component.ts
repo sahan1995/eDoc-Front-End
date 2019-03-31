@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from "@angular/router";
 import {MyPrivatePracticeService} from "../service/my-private-practice.service";
 import {DatePipe} from "@angular/common";
 import {MatSnackBar} from "@angular/material";
 import {DatePipe} from "@angular/common";
+
 @Component({
   selector: 'app-my-private-practice',
   templateUrl: './my-private-practice.component.html',
@@ -11,26 +12,27 @@ import {DatePipe} from "@angular/common";
 })
 export class MyPrivatePracticeComponent implements OnInit {
 
-  constructor(private route:Router,private myppService:MyPrivatePracticeService, private snackBar: MatSnackBar) { }
+  constructor(private route: Router, private myppService: MyPrivatePracticeService, private snackBar: MatSnackBar) {
+  }
 
   private user_Full_Name;
   private DID;
   private todayAppCount;
-  public appCode="";
-  private appointment:any;
+  public appCode = "";
+  private appointment: any;
   private isSearch = false;
 
-  private morning=false;
+  private morning = false;
   private afternoon = false;
   private evening = false;
   private night = false;
-  private qty ="";
-  private days="";
-  private drug="";
+  private qty = "";
+  private days = "";
+  private drug = "";
   private prescAdded = false;
   private lastID;
   private pressID;
-  private prescription :any;
+  private prescription: any;
   private meal;
   curDate = new Date();
   dateFormat = require('dateformat');
@@ -38,13 +40,13 @@ export class MyPrivatePracticeComponent implements OnInit {
   myFormattedDate = this.pipe.transform(this.curDate, 'yyyy-MM-dd');
   time = this.dateFormat(this.curDate, "h:MM:ss TT")
 
-
+  public finishedAppointments: any;
 
   ngOnInit() {
-    if(localStorage.getItem("fname")==null){
+    if (localStorage.getItem("fname") == null) {
       this.route.navigate(["/SignIn"])
-    }else{
-      this.user_Full_Name = localStorage.getItem("fname")+" "+localStorage.getItem("lname");
+    } else {
+      this.user_Full_Name = localStorage.getItem("fname") + " " + localStorage.getItem("lname");
       this.DID = localStorage.getItem("id")
     }
 
@@ -52,28 +54,43 @@ export class MyPrivatePracticeComponent implements OnInit {
   }
 
 
-
-
-  getTodayAppCount(){
-    this.myppService.getTodayAppCount(this.DID).subscribe(result=>{
+  getTodayAppCount() {
+    this.myppService.getTodayAppCount(this.DID).subscribe(result => {
       this.todayAppCount = result;
     })
   }
 
 
+  getAppointment() {
 
-  getAppointment(){
-
-    this.myppService.getAppointment(this.appCode).subscribe(result=>{
+    this.myppService.getAppointment(this.appCode).subscribe(result => {
       this.appointment = result;
-      this.myppService.getProPic( this.appointment.patientDTO.profilePic).subscribe(imgRes=>{
+      this.myppService.getProPic(this.appointment.patientDTO.profilePic).subscribe(imgRes => {
 
         let reader = new FileReader();
         reader.addEventListener("load", () => {
           this.appointment["patientPic"] = reader.result;
-          this.appointment["fullname"] =  this.appointment.patientDTO.fname+" "+ this.appointment.patientDTO.lname
+          this.appointment["fullname"] = this.appointment.patientDTO.fname + " " + this.appointment.patientDTO.lname
+          this.myppService.patientAppointments(this.appointment.patientDTO.id).subscribe(appnts => {
+            console.log(appnts);
+
+            this.finishedAppointments = appnts;
+            this.finishedAppointments.forEach(fapp=>{
+              this.myppService.getProPic(fapp.doctorDTO.profilePic).subscribe(docImg=>{
+                let reader2 = new FileReader();
+                reader2.addEventListener("load", () => {
+                  fapp["doctorPic"] = reader2.result;
+                }, false)
+                if (result) {
+                  const img2 = docImg as Blob
+                  reader2.readAsDataURL(img2)
+                }
+              })
+            })
+
+          })
           this.isSearch = true;
-          console.log(this.appointment)
+          // console.log(this.appointment)
         }, false)
         if (imgRes) {
           const img = imgRes as Blob
@@ -87,30 +104,30 @@ export class MyPrivatePracticeComponent implements OnInit {
     // console.log(this.appCode)
   }
 
-  submitPrescription(drugForm){
+  submitPrescription(drugForm) {
 
     let drug = drugForm.value;
     // var nums;
 
-    this.myppService.getPrescriptionID().subscribe(result=>{
-      if(this.prescAdded==false){
+    this.myppService.getPrescriptionID().subscribe(result => {
+      if (this.prescAdded == false) {
         this.lastID = result;
-        var num =  parseInt(this.lastID)+1;
+        var num = parseInt(this.lastID) + 1;
         // nums = 222;
         this.pressID = "Pres" + num;
-        this.prescription={
-          prescriptionID : this.pressID,
-          date:this.myFormattedDate
+        this.prescription = {
+          prescriptionID: this.pressID,
+          date: this.myFormattedDate
         }
-        this.addPrespription(this.pressID,this.prescription)
+        this.addPrespription(this.pressID, this.prescription)
       }
 
 
       console.log(this.prescription)
       drug["meal"] = this.meal;
       drug["prescriptionDTO"] = this.prescription
-      this.myppService.addDrug(this.pressID,drug).subscribe(result=>{
-        if(result){
+      this.myppService.addDrug(this.pressID, drug).subscribe(result => {
+        if (result) {
           this.morning = false;
           this.afternoon = false;
           this.night = false;
@@ -118,7 +135,7 @@ export class MyPrivatePracticeComponent implements OnInit {
           this.drug = "";
           this.qty = "";
           this.days = ""
-          this.snackBar.open("Drug Added", "",{
+          this.snackBar.open("Drug Added", "", {
             duration: 5000,
           });
         }
@@ -128,22 +145,22 @@ export class MyPrivatePracticeComponent implements OnInit {
   }
 
 
-  selectMeal(meal){
+  selectMeal(meal) {
     this.meal = meal;
   }
 
-  addPrespription(presID,prescription){
+  addPrespription(presID, prescription) {
 
-    this.myppService.addPrescription(presID,this.appCode,prescription).subscribe(result=>{
-      if(result==true){
+    this.myppService.addPrescription(presID, this.appCode, prescription).subscribe(result => {
+      if (result == true) {
         this.prescAdded = true;
       }
     })
   }
 
-  finishAppointment(){
-    this.myppService.finishAppointment(this.appCode).subscribe(result=>{
-      if(result){
+  finishAppointment() {
+    this.myppService.finishAppointment(this.appCode).subscribe(result => {
+      if (result) {
         this.isSearch = false;
 
 
@@ -151,9 +168,9 @@ export class MyPrivatePracticeComponent implements OnInit {
     })
   }
 
-  test(){
+  test() {
     console.log("test")
-    this.myppService.justTest().subscribe(res=>{
+    this.myppService.justTest().subscribe(res => {
       console.log(res);
     })
   }

@@ -10,7 +10,7 @@ import {AgmCoreModule} from "@agm/core"
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {FormsModule} from "@angular/forms";
 import {HttpClientModule} from "@angular/common/http";
-import {MatDialogModule} from '@angular/material/dialog';4
+import {MatDialogModule} from '@angular/material/dialog';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import { SignInComponent } from './sign-in/sign-in.component';
@@ -70,6 +70,8 @@ import { DoctorChatListComponent } from './doctor-chat/components/doctor-chat-li
 import { DoctorChatroomTitleBarComponent } from './doctor-chat/components/doctor-chatroom-title-bar/doctor-chatroom-title-bar.component';
 import { DoctorChatroomWindowComponent } from './doctor-chat/components/doctor-chatroom-window/doctor-chatroom-window.component';
 import { PatientFamilyDoctorsComponent } from './patient-family-doctors/patient-family-doctors.component';
+import { DoctorsFamilyPatientsComponent } from './doctors-family-patients/doctors-family-patients.component';
+
 
 @NgModule({
   declarations: [
@@ -103,6 +105,7 @@ import { PatientFamilyDoctorsComponent } from './patient-family-doctors/patient-
     DoctorChatroomTitleBarComponent,
     DoctorChatroomWindowComponent,
     PatientFamilyDoctorsComponent,
+    DoctorsFamilyPatientsComponent,
 
 
   ],

@@ -48,7 +48,7 @@ export class DoctorVideochatDashboardComponent implements OnInit {
   pipe = new DatePipe('en-US');
   myFormattedDate = this.pipe.transform(this.curDate, 'yyyy-MM-dd');
   time = this.dateFormat(this.curDate, "h:MM:ss TT");
-
+  private finishedAppointments;
 
   ngOnInit() {
 
@@ -132,7 +132,7 @@ export class DoctorVideochatDashboardComponent implements OnInit {
       })
     })
     //-----------------------------------------------------------------------------
-
+    this.patientTreatmentHistory();
   }
 
   // connect() {
@@ -272,6 +272,30 @@ export class DoctorVideochatDashboardComponent implements OnInit {
     //
     //   }
     // })
+  }
+
+
+  patientTreatmentHistory(){
+
+    this.doctorChatService.getPatientAppointments(this.PID).subscribe(result=>{
+      this.finishedAppointments = result;
+      this.finishedAppointments.forEach(fapp=>{
+        this.doctorChatService.getProPic(fapp.doctorDTO.profilePic).subscribe(docImg=>{
+          let reader2 = new FileReader();
+          reader2.addEventListener("load", () => {
+            fapp["doctorPic"] = reader2.result;
+          }, false)
+          if (result) {
+            const img2 = docImg as Blob
+            reader2.readAsDataURL(img2)
+          }
+        })
+      })
+
+
+
+
+    })
   }
 
 }

@@ -40,7 +40,9 @@ export class DoctorRequestsComponent implements OnInit {
 
     this.docReqSer.getDoctorRequests(this.DID).subscribe(result => {
       this.docRequests = result;
-
+      if(this.docRequests.length==0){
+        console.log("here")
+      }
       this.docRequests.forEach(docReq => {
 
         this.patientFullName = docReq.patientDTO.fname + " " + docReq.patientDTO.mname + " " + docReq.patientDTO.lname;

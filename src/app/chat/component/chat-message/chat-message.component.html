@@ -1,6 +1,6 @@
 
-<div class="chat-message d-flex" [ngStyle]="{'float': message.float}" >
-
+<div class="chat-message d-flex"  >
+  <!--[ngStyle]="{'float': message.float}"-->
   <div class="col-lg-12 msg" >
     <div class="col-lg-3">
       <img src="{{message.sender.photoUrl}}" class="rounded-circle">
@@ -13,7 +13,7 @@
             {{message.sender.firstName}} {{message.sender.lastName}}
           </div>
 
-          <small class="timestamp" >{{message.createAt}}</small>
+          <small class="timestamp">{{message.createAt.toDate()|date:'yyyy/MM/dd h:mm:ss a'}}</small>
           <div class="message">
             {{message.message}}
           </div>

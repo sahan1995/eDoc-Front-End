@@ -443,6 +443,10 @@
     <section class="content">
       <!-- Small boxes (Stat box) -->
       <div class="row">
+
+        <div class="w3-container w3-center" *ngIf="docRequests.length==0">
+          <h1>You Haven't any Request</h1>
+        </div>
         <div class="row w3-container w3-center mainDiv" >
           <div class="col-lg-6 appdiv " *ngFor="let req of docRequests">
             <div class="w3-container w3-border w3-white w3-animate-opacity " *ngIf="!req.isAccept&&!req.isCancle">

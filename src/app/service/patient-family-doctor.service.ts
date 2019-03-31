@@ -28,8 +28,6 @@ export class PatientFamilyDoctorService {
 
 
   removeDoctor(PID,DID){
-
     return this.http.delete(this.url+"patientFamDoc?PID="+PID+"&DID="+DID);
-
   }
 }

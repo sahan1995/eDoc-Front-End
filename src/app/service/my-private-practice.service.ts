@@ -44,4 +44,7 @@ export class MyPrivatePracticeService {
   justTest(){
     return this.http.get("http://192.168.1.104:8080/api/v1/doctors");
   }
+  patientAppointments(PID){
+    return this.http.get(this.url+"patients/finishedAppointmet?PID="+PID);
+  }
 }

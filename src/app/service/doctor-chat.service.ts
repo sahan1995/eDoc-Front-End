@@ -65,4 +65,14 @@ export class DoctorChatService {
     return this.http.get(this.url+"doctors/"+DID);
   }
 
+  getPatientAppointments(PID){
+    return this.http.get(this.url+"patients/finishedAppointmet?PID="+PID);
+  }
+  getProPic(picName){
+    const httpOptions = {
+      'responseType'  : 'blob' as 'json'
+      //'responseType'  : 'blob' as 'json'        //This also worked
+    };
+    return this.http.get(this.url+"patients/getPic?picName="+picName,httpOptions)
+  }
 }
