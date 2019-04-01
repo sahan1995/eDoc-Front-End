@@ -135,6 +135,41 @@ export class PatientAppointmentsComponent implements OnInit {
   finishedAppointments(){
     this.patientAppService.getFinishedAppointments(this.PID).subscribe(result=>{
       this.finishedAppointments = result;
+      if (this.finishedAppointments!=null){
+        this.finishedAppointments.forEach(finishApp=>{
+
+          finishApp["DID"] = finishApp.doctorDTO.did
+          finishApp["doctorName"] = finishApp.doctorDTO.fname + " " + finishApp.doctorDTO.lname;
+          finishApp["drugs"] = finishApp.prescriptionDTO.drugs;
+          this.patientAppService.isFamDoc(this.PID,finishApp.doctorDTO.did).subscribe(result=>{
+            finishApp["isFamDoc"] = result;
+          })
+          this.patientAppService.getProPic(finishApp.doctorDTO.profilePic).subscribe(result => {
+
+            let reader = new FileReader();
+            reader.addEventListener("load", () => {
+              finishApp["doctorPic"] = reader.result;
+            }, false)
+            if (result) {
+              const img = result as Blob
+              reader.readAsDataURL(img)
+            }
+          })
+
+
+        })
+      }
+
+
+
+    })
+  }
+  cancleApp(appCode){
+
+this.patientAppService.cancleApp(appCode).subscribe(result=>{
+  this.patientAppService.getFinishedAppointments(this.PID).subscribe(result=>{
+    this.finishedAppointments = result;
+    if (this.finishedAppointments!=null){
       this.finishedAppointments.forEach(finishApp=>{
 
         finishApp["DID"] = finishApp.doctorDTO.did
@@ -157,8 +192,14 @@ export class PatientAppointmentsComponent implements OnInit {
 
 
       })
+    }
 
-    })
-  }
+
+
+  })
+})
+
+
+}
 
 }

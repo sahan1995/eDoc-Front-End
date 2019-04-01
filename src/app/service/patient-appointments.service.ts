@@ -40,5 +40,8 @@ export class PatientAppointmentsService {
     return this.http.get(this.url+"patientFamDoc/isFamDoc?PID="+PID+"&DID="+DID);
   }
 
+  cancleApp(appCode){
+    return this.http.post(this.url+"appointments/cancleApp?appCode="+appCode,null);
+  }
 
 }
