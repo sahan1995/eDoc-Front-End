@@ -34,5 +34,9 @@ export class DoctorRequestService {
   updateIsAccept(PID,DID){
     return this.http.post(this.url+"requestForDoctor/updateIsAccept?PID="+PID+ "&DID="+DID)
   }
+  hasPP(DID){
+    return this.http.get(this.url+"privatepractices/hasPP?DID="+DID)
+  }
+
 
 }

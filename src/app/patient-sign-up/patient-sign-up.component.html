@@ -1,18 +1,42 @@
 <body>
-
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
+<nav class="navbar navbar-inverse" role="navigation" style="background-color: black;">
+  <div class="container">
     <div class="navbar-header">
-      <a class="navbar-brand" href="#">eDoc</a>
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navbar-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">eDoc - Online Doctor Consultation Platform</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
-      <li><a href="#">Page 1</a></li>
-      <li><a href="#">Page 2</a></li>
-      <li><a href="#">Page 3</a></li>
-    </ul>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="top-navbar-1">
+      <ul class="nav navbar-nav navbar-right">
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Features</a></li>
+        <li><a href="#">Video</a></li>
+        <li><a routerLink="Doctor-SignUp">I am a Doctor</a></li>
+        <li><a routerLink="Patient-Sign_Up">I am a Patient</a></li>
+        <li><a routerLink="SignIn">Login</a></li>
+        <!--<li><a class="btn btn-link-3" href="#">Button</a></li>-->
+      </ul>
+    </div>
   </div>
 </nav>
+<!--<nav class="navbar navbar-default">-->
+  <!--<div class="container-fluid">-->
+    <!--<div class="navbar-header">-->
+      <!--<a class="navbar-brand" href="#">eDoc</a>-->
+    <!--</div>-->
+    <!--<ul class="nav navbar-nav">-->
+      <!--<li class="active"><a href="#">Home</a></li>-->
+      <!--<li><a href="#">Page 1</a></li>-->
+      <!--<li><a href="#">Page 2</a></li>-->
+      <!--<li><a href="#">Page 3</a></li>-->
+    <!--</ul>-->
+  <!--</div>-->
+<!--</nav>-->
 
 <div class="card">
   <div class="header">

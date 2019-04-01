@@ -79,7 +79,10 @@ export class PatientVideochatDashboardComponent implements OnInit,AfterViewCheck
               private route: Router, private Aroute: ActivatedRoute,) {
   }
 
-
+  signOut(){
+    localStorage.clear();
+    this.route.navigate(["/"])
+  }
   ngOnInit() {
 
     if (localStorage.getItem("fname") == null) {

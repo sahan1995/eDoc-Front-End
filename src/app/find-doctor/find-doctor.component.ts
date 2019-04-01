@@ -373,7 +373,10 @@ export class FindDoctorComponent implements OnInit {
       })
     })
   }
-
+  signOut(){
+    localStorage.clear();
+    this.route.navigate(["/"])
+  }
   getDoctorBySpecial(special) {
     //   for (var x = 0; x < this.doctors.length; x++) {
     //     this.doctors.splice(x);

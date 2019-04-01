@@ -47,4 +47,8 @@ export class MyPrivatePracticeService {
   patientAppointments(PID){
     return this.http.get(this.url+"patients/finishedAppointmet?PID="+PID);
   }
+  hasPP(DID){
+    return this.http.get(this.url+"privatepractices/hasPP?DID="+DID)
+  }
+
 }

@@ -104,5 +104,13 @@ export class DoctorRequestsComponent implements OnInit {
 
 
   }
-
+  hasPP(){
+    this.docReqSer.hasPP(this.DID).subscribe(result=>{
+      if(!result){
+        this.route.navigate(["/Register-Private-Practice"])
+      }else{
+        this.route.navigate(["/My-Private-Practice"])
+      }
+    })
+  }
 }

@@ -29,4 +29,9 @@ export class DoctorFamilyPatientService {
   removePatient(PID,DID){
     return this.http.delete(this.url+"patientFamDoc?PID="+PID+"&DID="+DID);
   }
+
+  hasPP(DID){
+    return this.http.get(this.url+"privatepractices/hasPP?DID="+DID)
+  }
+
 }

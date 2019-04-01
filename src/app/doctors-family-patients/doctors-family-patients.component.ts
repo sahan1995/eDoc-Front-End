@@ -62,5 +62,13 @@ export class DoctorsFamilyPatientsComponent implements OnInit {
       }
     })
   }
-
+  hasPP(){
+    this.docService.hasPP(this.DID).subscribe(result=>{
+      if(!result){
+        this.route.navigate(["/Register-Private-Practice"])
+      }else{
+        this.route.navigate(["/My-Private-Practice"])
+      }
+    })
+  }
 }

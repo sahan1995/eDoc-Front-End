@@ -45,7 +45,10 @@ export class PatientAppointmentsComponent implements OnInit {
 
     this.finishedAppointments();
   }
-
+  signOut(){
+    localStorage.clear();
+    this.route.navigate(["/"])
+  }
 
   getPatientAppointments(){
     this.appType = "All  Appointment"

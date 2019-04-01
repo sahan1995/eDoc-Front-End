@@ -26,7 +26,7 @@ export class PatientHomeComponent implements OnInit {
 
   signOut(){
     localStorage.clear();
-    this.route.navigate(["/SignIn"])
+    this.route.navigate(["/"])
   }
 
 }

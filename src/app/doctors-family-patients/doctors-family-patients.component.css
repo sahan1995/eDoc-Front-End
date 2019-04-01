@@ -72,3 +72,6 @@
 .divMain{
   margin-top: 20px;
 }
+.pointer {
+  cursor: pointer;
+}

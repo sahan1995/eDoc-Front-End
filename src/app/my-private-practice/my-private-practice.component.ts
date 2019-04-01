@@ -174,4 +174,13 @@ export class MyPrivatePracticeComponent implements OnInit {
       console.log(res);
     })
   }
+  hasPP(){
+    this.myppService.hasPP(this.DID).subscribe(result=>{
+      if(!result){
+        this.route.navigate(["/Register-Private-Practice"])
+      }else{
+        this.route.navigate(["/My-Private-Practice"])
+      }
+    })
+  }
 }
