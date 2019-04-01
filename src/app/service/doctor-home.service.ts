@@ -17,6 +17,10 @@ export class DoctorHomeService {
     return this.http.get(this.url+"privatepractices/hasPP?DID="+DID)
   }
 
+  todayApp(DID){
+    return this.http.get(this.url+"appointments/todayDocAppointment?DID="+DID);
+  }
+
 
 
 
