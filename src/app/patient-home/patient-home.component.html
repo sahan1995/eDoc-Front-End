@@ -155,7 +155,8 @@
                   <div class="icon">
                     <i class="ion ion-bag"></i>
                   </div>
-                  <a [routerLink]="['/Patient-VideoChat-DashBoard',app.doctorDTO.DID,app.appCode]" class="small-box-footer" *ngIf="app.appType=='Web Consultation'">Take Appointment Now <i class="fa fa-arrow-circle-right"></i></a>
+                  <!--*ngIf="app.appType=='Web Consultation'"-->
+                  <a [routerLink]="['/Patient-VideoChat-DashBoard',app.doctorDTO.DID,app.appCode]" class="small-box-footer" >Take Appointment Now <i class="fa fa-arrow-circle-right"></i></a>
                 </div>
               </div>
 
@@ -427,113 +428,61 @@
         <section class="col-lg-5 connectedSortable">
 
           <!-- Map box -->
-          <div class="box box-solid bg-light-blue-gradient">
-            <div class="box-header">
-              <!-- tools box -->
-              <div class="pull-right box-tools">
-                <button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"
-                        title="Date range">
-                  <i class="fa fa-calendar"></i></button>
-                <button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"
-                        data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">
-                  <i class="fa fa-minus"></i></button>
-              </div>
-              <!-- /. tools -->
+          <!--<div class="box box-solid bg-light-blue-gradient">-->
+            <!--<div class="box-header">-->
+              <!--&lt;!&ndash; tools box &ndash;&gt;-->
+              <!--<div class="pull-right box-tools">-->
+                <!--<button type="button" class="btn btn-primary btn-sm daterange pull-right" data-toggle="tooltip"-->
+                        <!--title="Date range">-->
+                  <!--<i class="fa fa-calendar"></i></button>-->
+                <!--<button type="button" class="btn btn-primary btn-sm pull-right" data-widget="collapse"-->
+                        <!--data-toggle="tooltip" title="Collapse" style="margin-right: 5px;">-->
+                  <!--<i class="fa fa-minus"></i></button>-->
+              <!--</div>-->
+              <!--&lt;!&ndash; /. tools &ndash;&gt;-->
 
-              <i class="fa fa-map-marker"></i>
+              <!--<i class="fa fa-map-marker"></i>-->
 
-              <h3 class="box-title">
-                Doctors Near By Me
-              </h3>
-            </div>
-            <div class="box-body">
+              <!--<h3 class="box-title">-->
+                <!--Doctors Near By Me-->
+              <!--</h3>-->
+            <!--</div>-->
+            <!--<div class="box-body">-->
 
-              <div id="world-map" style="height: 250px; width: 100%;">
-                <agm-map  [longitude]="lng" [latitude]="lat" [zoom]="zoom" style="height: 250px; width: 100%;">
-                  <agm-marker [longitude]="lng" [latitude]="lat">
-                  </agm-marker>
-                  <agm-marker [longitude]="80.3847" [latitude]="6.7056"></agm-marker>
+              <!--<div id="world-map" style="height: 250px; width: 100%;">-->
+                <!--<agm-map  [longitude]="lng" [latitude]="lat" [zoom]="zoom" style="height: 250px; width: 100%;">-->
+                  <!--<agm-marker [longitude]="lng" [latitude]="lat">-->
+                  <!--</agm-marker>-->
+                  <!--<agm-marker [longitude]="80.3847" [latitude]="6.7056"></agm-marker>-->
 
 
-                </agm-map>
+                <!--</agm-map>-->
 
-              </div>
-            </div>
-            <!-- /.box-body-->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-1"></div>
-                  <div class="knob-label">Visitors</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <div id="sparkline-2"></div>
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <div id="sparkline-3"></div>
-                  <div class="knob-label">Exists</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-          </div>
-          <!-- /.box -->
+              <!--</div>-->
+            <!--</div>-->
+            <!--&lt;!&ndash; /.box-body&ndash;&gt;-->
+            <!--<div class="box-footer no-border">-->
+              <!--<div class="row">-->
+                <!--<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">-->
+                  <!--<div id="sparkline-1"></div>-->
+                  <!--<div class="knob-label">Visitors</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; ./col &ndash;&gt;-->
+                <!--<div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">-->
+                  <!--<div id="sparkline-2"></div>-->
+                  <!--<div class="knob-label">Online</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; ./col &ndash;&gt;-->
+                <!--<div class="col-xs-4 text-center">-->
+                  <!--<div id="sparkline-3"></div>-->
+                  <!--<div class="knob-label">Exists</div>-->
+                <!--</div>-->
+                <!--&lt;!&ndash; ./col &ndash;&gt;-->
+              <!--</div>-->
+              <!--&lt;!&ndash; /.row &ndash;&gt;-->
+            <!--</div>-->
+          <!--</div>-->
 
-          <!-- solid sales graph -->
-          <div class="box box-solid bg-teal-gradient">
-            <div class="box-header">
-              <i class="fa fa-th"></i>
-
-              <h3 class="box-title">Sales Graph</h3>
-
-              <div class="box-tools pull-right">
-                <button type="button" class="btn bg-teal btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>
-                </button>
-                <button type="button" class="btn bg-teal btn-sm" data-widget="remove"><i class="fa fa-times"></i>
-                </button>
-              </div>
-            </div>
-            <div class="box-body border-radius-none">
-              <div class="chart" id="line-chart" style="height: 250px;"></div>
-            </div>
-            <!-- /.box-body -->
-            <div class="box-footer no-border">
-              <div class="row">
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="20" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Mail-Orders</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center" style="border-right: 1px solid #f4f4f4">
-                  <input type="text" class="knob" data-readonly="true" value="50" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">Online</div>
-                </div>
-                <!-- ./col -->
-                <div class="col-xs-4 text-center">
-                  <input type="text" class="knob" data-readonly="true" value="30" data-width="60" data-height="60"
-                         data-fgColor="#39CCCC">
-
-                  <div class="knob-label">In-Store</div>
-                </div>
-                <!-- ./col -->
-              </div>
-              <!-- /.row -->
-            </div>
-            <!-- /.box-footer -->
-          </div>
-          <!-- /.box -->
-
-          <!-- Calendar -->
-
-          <!-- /.box -->
 
         </section>
         <!-- right col -->
